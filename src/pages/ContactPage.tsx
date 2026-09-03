@@ -18,6 +18,20 @@ export function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitted(true)
+
+    // Redirect form data to Admin@producepos.app
+    const subject = encodeURIComponent(`Produce POS Demo Request - ${formData.storeName || formData.name}`)
+    const body = encodeURIComponent(
+      `Demo Request Details:\n\n` +
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Phone: ${formData.phone}\n` +
+      `Store Name: ${formData.storeName}\n` +
+      `Store Type: ${formData.storeType}\n` +
+      `POS Register Lanes: ${formData.lanes}\n\n` +
+      `Special Requirements / Notes:\n${formData.message || 'None'}`
+    )
+    window.location.href = `mailto:Admin@producepos.app?subject=${subject}&body=${body}`
   }
 
   const faqs = [
@@ -187,7 +201,7 @@ export function ContactPage() {
                   </div>
                   <div>
                     <div className="font-semibold text-white">Call Sales Support</div>
-                    <div className="text-zinc-400 mt-0.5">(800) 555-PRODUCE</div>
+                    <a href="tel:3472130687" className="text-zinc-400 mt-0.5 hover:text-[#4ade80] transition block">(347) 213-0687</a>
                     <div className="text-[10px] text-zinc-500">Mon–Sat: 8:00 AM – 8:00 PM EST</div>
                   </div>
                 </div>
@@ -198,7 +212,7 @@ export function ContactPage() {
                   </div>
                   <div>
                     <div className="font-semibold text-white">Email Us</div>
-                    <div className="text-zinc-400 mt-0.5">sales@producepos.com</div>
+                    <a href="mailto:Admin@producepos.app" className="text-zinc-400 mt-0.5 hover:text-[#4ade80] transition block">Admin@producepos.app</a>
                     <div className="text-[10px] text-zinc-500">24/7 Rapid Email Response</div>
                   </div>
                 </div>
@@ -209,7 +223,7 @@ export function ContactPage() {
                   </div>
                   <div>
                     <div className="font-semibold text-white">Headquarters</div>
-                    <div className="text-zinc-400 mt-0.5">New York, NY 10001 · USA</div>
+                    <div className="text-zinc-400 mt-0.5">3508 White Plains Road, Bronx, NY 10467</div>
                   </div>
                 </div>
               </div>

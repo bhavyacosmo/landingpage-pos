@@ -90,15 +90,15 @@ export function Footer({ setCurrentPage }: FooterProps) {
             <div className="space-y-2 text-xs">
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-[#4ade80]" />
-                <span>(800) 555-PRODUCE</span>
+                <a href="tel:3472130687" className="hover:text-[#4ade80] transition">(347) 213-0687</a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-[#4ade80]" />
-                <span>sales@producepos.com</span>
+                <a href="mailto:Admin@producepos.app" className="hover:text-[#4ade80] transition">Admin@producepos.app</a>
               </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-[#4ade80]" />
-                <span>New York, NY · United States</span>
+              <div className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 text-[#4ade80] shrink-0 mt-0.5" />
+                <span>3508 White Plains Road, Bronx, NY 10467</span>
               </div>
             </div>
           </div>
