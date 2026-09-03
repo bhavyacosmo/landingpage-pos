@@ -14,10 +14,11 @@ import {
   Layers,
   ArrowRight,
   CheckCircle,
+  Phone,
 } from 'lucide-react'
 
 interface PageProps {
-  setCurrentPage: (page: 'home' | 'features' | 'contact' | 'terms' | 'privacy') => void
+  setCurrentPage: (page: 'home' | 'features' | 'terms' | 'privacy') => void
 }
 
 export function FeaturesPage({ setCurrentPage }: PageProps) {
@@ -49,12 +50,13 @@ export function FeaturesPage({ setCurrentPage }: PageProps) {
                 Cashier Checkout & Hardware Integration
               </h2>
             </div>
-            <button
-              onClick={() => setCurrentPage('contact')}
-              className="rounded-xl bg-[#4ade80] px-6 py-3 text-xs font-bold uppercase tracking-wider text-black transition hover:bg-[#3bce70]"
+            <a
+              href="tel:3472130687"
+              className="flex items-center gap-2 rounded-xl bg-[#4ade80] px-6 py-3 text-xs font-bold uppercase tracking-wider text-black transition hover:bg-[#3bce70]"
             >
-              Request Demo
-            </button>
+              <Phone className="h-4 w-4" />
+              <span>Call (347) 213-0687</span>
+            </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

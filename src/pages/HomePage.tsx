@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   ShoppingBag,
   Zap,
@@ -14,13 +15,37 @@ import {
   Cpu,
   RefreshCw,
   Users,
+  ChevronDown,
+  Phone,
+  Mail,
 } from 'lucide-react'
 
 interface PageProps {
-  setCurrentPage: (page: 'home' | 'features' | 'contact' | 'terms' | 'privacy') => void
+  setCurrentPage: (page: 'home' | 'features' | 'terms' | 'privacy') => void
 }
 
 export function HomePage({ setCurrentPage }: PageProps) {
+  const [openFaq, setOpenFaq] = useState<number | null>(0)
+
+  const faqs = [
+    {
+      q: 'Does Produce POS connect directly to hardware weight scales?',
+      a: 'Yes! Produce POS includes native drivers for Zebra MP7000, Magellan, CAS, and standard serial/USB scale bridges. Weight is read automatically in 0.1 seconds at checkout.',
+    },
+    {
+      q: 'What happens if our internet goes down during store hours?',
+      a: 'Produce POS features 100% offline register resilience. Cashiers can continue ringing up sales, scanning barcodes, weighing items, and printing receipts without internet. When internet returns, sales automatically sync to the cloud.',
+    },
+    {
+      q: 'Does Produce POS support EBT SNAP, WIC, and OTC payments?',
+      a: 'Yes! Produce POS fully supports split tenders, including EBT SNAP Food Stamps, state WIC programs, OTC health benefit cards, credit, debit, and cash.',
+    },
+    {
+      q: 'Can we access the Backoffice from home or on a mobile phone?',
+      a: 'Yes! The standalone Web Backoffice allows store owners and managers to monitor live register sales, update prices, manage inventory, and view profit reports from any browser on phone, tablet, or laptop.',
+    },
+  ]
+
   return (
     <div className="space-y-24 pb-20">
       {/* Hero Section */}
@@ -47,18 +72,19 @@ export function HomePage({ setCurrentPage }: PageProps) {
           {/* CTAs */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <button
-              onClick={() => setCurrentPage('contact')}
+              onClick={() => setCurrentPage('features')}
               className="flex items-center gap-2 rounded-xl bg-[#4ade80] px-8 py-4 text-sm font-bold uppercase tracking-wider text-black transition hover:bg-[#3bce70] shadow-xl shadow-[#4ade80]/20"
             >
-              <span>Schedule Free Store Demo</span>
+              <span>Explore Features</span>
               <ArrowRight className="h-4 w-4" />
             </button>
-            <button
-              onClick={() => setCurrentPage('features')}
+            <a
+              href="tel:3472130687"
               className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              <span>Explore Features</span>
-            </button>
+              <Phone className="h-4 w-4 text-[#4ade80]" />
+              <span>Call Sales (347) 213-0687</span>
+            </a>
           </div>
 
           {/* Live Interface Preview Mockup */}
@@ -190,17 +216,51 @@ export function HomePage({ setCurrentPage }: PageProps) {
             Ready to Upgrade Your Store POS?
           </h2>
           <p className="mt-4 text-sm sm:text-base text-zinc-300 max-w-2xl mx-auto">
-            Book a personalized demonstration with our grocery POS specialists and experience the difference.
+            Explore our complete feature set or speak directly with our retail POS specialists.
           </p>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <button
-              onClick={() => setCurrentPage('contact')}
+              onClick={() => setCurrentPage('features')}
               className="flex items-center gap-2 rounded-xl bg-[#4ade80] px-8 py-4 text-sm font-bold uppercase tracking-wider text-black transition hover:bg-[#3bce70] shadow-xl shadow-[#4ade80]/20"
             >
-              <span>Book Live Demo</span>
+              <span>View System Features</span>
               <ArrowRight className="h-4 w-4" />
             </button>
+            <a
+              href="tel:3472130687"
+              className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
+              <Phone className="h-4 w-4 text-[#4ade80]" />
+              <span>Call (347) 213-0687</span>
+            </a>
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="mx-auto max-w-4xl px-6 lg:px-8 space-y-8 pt-4">
+        <div className="text-center space-y-2">
+          <div className="text-xs font-bold uppercase tracking-widest text-[#4ade80]">Client Questions</div>
+          <h2 className="font-heading text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, idx) => (
+            <div key={idx} className="rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden">
+              <button
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                className="flex w-full items-center justify-between p-6 text-left font-heading font-semibold text-sm text-white hover:text-[#4ade80] transition"
+              >
+                <span>{faq.q}</span>
+                <ChevronDown className={`h-4 w-4 transition-transform ${openFaq === idx ? 'rotate-180 text-[#4ade80]' : 'text-zinc-500'}`} />
+              </button>
+              {openFaq === idx && (
+                <div className="border-t border-white/5 px-6 pb-6 pt-2 text-xs leading-relaxed text-zinc-400">
+                  {faq.a}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </section>
     </div>

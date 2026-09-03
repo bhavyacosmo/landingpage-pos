@@ -1,21 +1,20 @@
-import { ShoppingBag, Sparkles, Menu, X, ArrowRight } from 'lucide-react'
+import { ShoppingBag, Sparkles, Menu, X, Phone } from 'lucide-react'
 import { useState } from 'react'
 
 interface NavbarProps {
-  currentPage: 'home' | 'features' | 'contact' | 'terms' | 'privacy'
-  setCurrentPage: (page: 'home' | 'features' | 'contact' | 'terms' | 'privacy') => void
+  currentPage: 'home' | 'features' | 'terms' | 'privacy'
+  setCurrentPage: (page: 'home' | 'features' | 'terms' | 'privacy') => void
 }
 
 export function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  const navItems: Array<{ id: 'home' | 'features' | 'contact' | 'terms' | 'privacy'; label: string }> = [
+  const navItems: Array<{ id: 'home' | 'features' | 'terms' | 'privacy'; label: string }> = [
     { id: 'home', label: 'Home' },
     { id: 'features', label: 'Features' },
-    { id: 'contact', label: 'Contact' },
   ]
 
-  const handleNavClick = (id: 'home' | 'features' | 'contact' | 'terms' | 'privacy') => {
+  const handleNavClick = (id: 'home' | 'features' | 'terms' | 'privacy') => {
     setCurrentPage(id)
     setMobileOpen(false)
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -59,15 +58,15 @@ export function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
           ))}
         </nav>
 
-        {/* CTA Button */}
+        {/* Call Support CTA Button */}
         <div className="hidden md:flex items-center gap-4">
-          <button
-            onClick={() => handleNavClick('contact')}
+          <a
+            href="tel:3472130687"
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-[#4ade80] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-black transition hover:bg-[#3bce70] shadow-lg shadow-[#4ade80]/20"
           >
-            <span>Request Demo</span>
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </button>
+            <Phone className="h-4 w-4" />
+            <span>Call (347) 213-0687</span>
+          </a>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -96,13 +95,13 @@ export function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
                 {item.label}
               </button>
             ))}
-            <button
-              onClick={() => handleNavClick('contact')}
+            <a
+              href="tel:3472130687"
               className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#4ade80] py-3 text-xs font-bold uppercase tracking-wider text-black shadow-lg shadow-[#4ade80]/20"
             >
-              <span>Request Demo</span>
-              <ArrowRight className="h-4 w-4" />
-            </button>
+              <Phone className="h-4 w-4" />
+              <span>Call (347) 213-0687</span>
+            </a>
           </div>
         </div>
       )}

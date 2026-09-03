@@ -1,11 +1,11 @@
 import { ShoppingBag, Shield, Mail, Phone, MapPin } from 'lucide-react'
 
 interface FooterProps {
-  setCurrentPage: (page: 'home' | 'features' | 'contact' | 'terms' | 'privacy') => void
+  setCurrentPage: (page: 'home' | 'features' | 'terms' | 'privacy') => void
 }
 
 export function Footer({ setCurrentPage }: FooterProps) {
-  const handleNavClick = (page: 'home' | 'features' | 'contact' | 'terms' | 'privacy') => {
+  const handleNavClick = (page: 'home' | 'features' | 'terms' | 'privacy') => {
     setCurrentPage(page)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -47,11 +47,6 @@ export function Footer({ setCurrentPage }: FooterProps) {
               <li>
                 <button onClick={() => handleNavClick('features')} className="hover:text-[#4ade80] transition">
                   Full Feature Deep-Dive
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNavClick('contact')} className="hover:text-[#4ade80] transition">
-                  Request a Demo
                 </button>
               </li>
               <li>
