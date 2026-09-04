@@ -29,16 +29,16 @@ export function HomePage({ setCurrentPage }: PageProps) {
 
   const faqs = [
     {
-      q: 'Does Produce POS connect directly to hardware weight scales?',
-      a: 'Yes! Produce POS includes native drivers for Zebra MP7000, Magellan, CAS, and standard serial/USB scale bridges. Weight is read automatically in 0.1 seconds at checkout.',
+      q: 'Does Produce AI POS connect directly to hardware weight scales?',
+      a: 'Yes! Produce AI POS includes native drivers for Zebra MP7000, Magellan, CAS, and standard serial/USB scale bridges. Weight is read automatically in 0.1 seconds at checkout.',
     },
     {
       q: 'What happens if our internet goes down during store hours?',
-      a: 'Produce POS features 100% offline register resilience. Cashiers can continue ringing up sales, scanning barcodes, weighing items, and printing receipts without internet. When internet returns, sales automatically sync to the cloud.',
+      a: 'Produce AI POS features 100% offline register resilience. Cashiers can continue ringing up sales, scanning barcodes, weighing items, and printing receipts without internet. When internet returns, sales automatically sync to the cloud.',
     },
     {
-      q: 'Does Produce POS support EBT SNAP, WIC, and OTC payments?',
-      a: 'Yes! Produce POS fully supports split tenders, including EBT SNAP Food Stamps, state WIC programs, OTC health benefit cards, credit, debit, and cash.',
+      q: 'Does Produce AI POS support EBT SNAP, WIC, and OTC payments?',
+      a: 'Yes! Produce AI POS fully supports split tenders, including EBT SNAP Food Stamps, state WIC programs, OTC health benefit cards, credit, debit, and cash.',
     },
     {
       q: 'Can we access the Backoffice from home or on a mobile phone?',
@@ -94,7 +94,7 @@ export function HomePage({ setCurrentPage }: PageProps) {
                 <div className="h-3 w-3 rounded-full bg-red-500/80" />
                 <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
                 <div className="h-3 w-3 rounded-full bg-green-500/80" />
-                <span className="ml-2 text-xs font-mono text-zinc-500">Produce POS - Live Lane Register v1.0</span>
+                <span className="ml-2 text-xs font-mono text-zinc-500">Produce AI POS - Live Lane Register v1.0</span>
               </div>
               <div className="flex items-center gap-3 text-xs font-semibold text-[#4ade80]">
                 <div className="h-2 w-2 rounded-full bg-[#4ade80] animate-pulse" />

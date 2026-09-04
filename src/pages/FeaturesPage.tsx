@@ -30,7 +30,7 @@ export function FeaturesPage({ setCurrentPage }: PageProps) {
           <span>Complete System Architecture</span>
         </div>
         <h1 className="font-heading text-4xl sm:text-5xl font-extrabold text-white">
-          Produce POS <span className="gradient-accent-text">Feature Deep-Dive</span>
+          Produce AI POS <span className="gradient-accent-text">Feature Deep-Dive</span>
         </h1>
         <p className="text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto">
           Built from the ground up for high-traffic produce markets, grocery stores, and meat departments.

@@ -20,7 +20,7 @@ export function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="font-heading text-lg font-bold text-white">1. Information We Collect</h2>
           <p>
-            Produce POS Inc. ("Company", "we", "us") respects the privacy of store owners, cashiers, and store customers. We collect information necessary to operate point-of-sale registers, process transactions, and deliver cloud backoffice analytics:
+            Produce AI POS Inc. ("Company", "we", "us") respects the privacy of store owners, cashiers, and store customers. We collect information necessary to operate point-of-sale registers, process transactions, and deliver cloud backoffice analytics:
           </p>
           <ul className="list-disc pl-5 space-y-1 text-zinc-400">
             <li><strong>Store Account Data:</strong> Business name, store address, phone number, email address, tax ID, and user account credentials.</li>
@@ -32,7 +32,7 @@ export function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="font-heading text-lg font-bold text-white">2. PCI-DSS Security & Credit Card Privacy</h2>
           <p>
-            Produce POS does <strong>NOT</strong> store or retain raw credit card numbers, CVVs, or card magnetic stripe data on local register hard drives or cloud servers. All payment processing is transmitted directly through PCI-DSS Level 1 compliant payment terminals and gateways.
+            Produce AI POS does <strong>NOT</strong> store or retain raw credit card numbers, CVVs, or card magnetic stripe data on local register hard drives or cloud servers. All payment processing is transmitted directly through PCI-DSS Level 1 compliant payment terminals and gateways.
           </p>
         </section>
 
@@ -66,7 +66,7 @@ export function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="font-heading text-lg font-bold text-white">6. Contact Privacy Team</h2>
           <p>
-            If you have questions or concerns regarding our Privacy Policy or data handling practices, please contact us at <span className="text-[#4ade80]">privacy@producepos.com</span>.
+            If you have questions or concerns regarding our Privacy Policy or data handling practices, please contact us at <span className="text-[#4ade80]">privacy@produceaipos.com</span>.
           </p>
         </section>
       </div>

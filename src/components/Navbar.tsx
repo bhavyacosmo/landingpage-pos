@@ -33,7 +33,7 @@ export function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
           </div>
           <div>
             <div className="font-heading font-extrabold text-lg tracking-wider text-white flex items-center gap-1.5">
-              PRODUCE <span className="text-[#4ade80]">POS</span>
+              PRODUCE AI <span className="text-[#4ade80]">POS</span>
             </div>
             <div className="text-[10px] font-medium uppercase tracking-widest text-zinc-400">
               Grocery & Retail Systems

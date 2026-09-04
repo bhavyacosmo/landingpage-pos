@@ -21,7 +21,7 @@ export function Footer({ setCurrentPage }: FooterProps) {
                 <ShoppingBag className="h-5 w-5 stroke-[2.5]" />
               </div>
               <div className="font-heading font-extrabold text-lg text-white tracking-wider">
-                PRODUCE <span className="text-[#4ade80]">POS</span>
+                PRODUCE AI <span className="text-[#4ade80]">POS</span>
               </div>
             </div>
             <p className="text-xs leading-relaxed text-zinc-400">
@@ -89,7 +89,7 @@ export function Footer({ setCurrentPage }: FooterProps) {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-[#4ade80]" />
-                <a href="mailto:Admin@producepos.app" className="hover:text-[#4ade80] transition">Admin@producepos.app</a>
+                <a href="mailto:Admin@produceaipos.app" className="hover:text-[#4ade80] transition">Admin@produceaipos.app</a>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-[#4ade80] shrink-0 mt-0.5" />
@@ -101,7 +101,7 @@ export function Footer({ setCurrentPage }: FooterProps) {
 
         <div className="mt-12 border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
           <div>
-            © {new Date().getFullYear()} Produce POS Inc. All rights reserved.
+            © {new Date().getFullYear()} Produce AI POS Inc. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
             <button onClick={() => handleNavClick('terms')} className="hover:text-zinc-300">
