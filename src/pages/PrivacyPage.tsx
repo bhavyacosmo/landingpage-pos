@@ -66,7 +66,7 @@ export function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="font-heading text-lg font-bold text-white">6. Contact Privacy Team</h2>
           <p>
-            If you have questions or concerns regarding our Privacy Policy or data handling practices, please contact us at <span className="text-[#4ade80]">privacy@produceaipos.com</span>.
+            If you have questions or concerns regarding our Privacy Policy or data handling practices, please contact us at <span className="text-[#4ade80]">Admin@producepos.app</span>.
           </p>
         </section>
       </div>

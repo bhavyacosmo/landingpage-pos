@@ -89,7 +89,7 @@ export function Footer({ setCurrentPage }: FooterProps) {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-[#4ade80]" />
-                <a href="mailto:Admin@produceaipos.app" className="hover:text-[#4ade80] transition">Admin@produceaipos.app</a>
+                <a href="mailto:Admin@producepos.app" className="hover:text-[#4ade80] transition">Admin@producepos.app</a>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-[#4ade80] shrink-0 mt-0.5" />

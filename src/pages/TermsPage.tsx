@@ -60,7 +60,7 @@ export function TermsPage() {
         <section className="space-y-3">
           <h2 className="font-heading text-lg font-bold text-white">6. Contact Information</h2>
           <p>
-            If you have questions regarding these Terms & Conditions, please email us at <span className="text-[#4ade80]">legal@produceaipos.com</span> or write to Produce AI POS Inc., New York, NY 10001, USA.
+            If you have questions regarding these Terms & Conditions, please email us at <span className="text-[#4ade80]">Admin@producepos.app</span> or write to Produce AI POS Inc., New York, NY 10001, USA.
           </p>
         </section>
       </div>
