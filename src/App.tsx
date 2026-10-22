@@ -11,8 +11,15 @@ import { FaqSection } from './components/FaqSection';
 import { GrantCallout } from './components/GrantCallout';
 import { AppleFooter } from './components/AppleFooter';
 import { LeadModal } from './components/LeadModal';
+import { LegalPage } from './components/LegalPage';
+
+const LEGAL_ROUTES: Record<string, 'privacy' | 'terms'> = {
+  '/privacy-policy': 'privacy',
+  '/terms-of-service': 'terms'
+};
 
 export default function App() {
+  const legalPage = LEGAL_ROUTES[window.location.pathname.replace(/\/+$/, '')];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -56,10 +63,20 @@ export default function App() {
       { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     );
 
+    // Jump to the requested section when arriving from another page (e.g. /#faq)
+    let hashTimer: number | undefined;
+    if (window.location.hash) {
+      const target = document.querySelector(window.location.hash);
+      hashTimer = window.setTimeout(() => target?.scrollIntoView({ behavior: 'instant' }), 150);
+    }
+
     const elements = document.querySelectorAll('.reveal-on-scroll, .reveal-scale, .reveal-fade');
     elements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(hashTimer);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -113,6 +130,10 @@ export default function App() {
 
       {/* Main Experience Stream */}
       <main className="w-full">
+        {legalPage ? (
+          <LegalPage type={legalPage} />
+        ) : (
+        <>
         {/* 1. Nike + Apple Monumental Hero with Produce AI Intel */}
         <HeroMinimal onOpenModal={() => setIsModalOpen(true)} />
 
@@ -139,6 +160,8 @@ export default function App() {
 
         {/* 9. High-Conversion Free Hardware Callout */}
         <GrantCallout onOpenModal={() => setIsModalOpen(true)} />
+        </>
+        )}
       </main>
 
       {/* Minimalist Apple Footer */}

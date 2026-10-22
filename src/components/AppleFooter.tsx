@@ -17,11 +17,11 @@ export const AppleFooter: React.FC = () => {
               Hardware Suite
             </div>
             <ul className="space-y-2">
-              <li><a href="#hardware" className="hover:text-black dark:hover:text-white transition-colors">Dual Touchscreen Register</a></li>
-              <li><a href="#hardware" className="hover:text-black dark:hover:text-white transition-colors">Zebra Bi-Optic Scanner Scale</a></li>
-              <li><a href="#hardware" className="hover:text-black dark:hover:text-white transition-colors">Handheld Store Scanner</a></li>
-              <li><a href="#hardware" className="hover:text-black dark:hover:text-white transition-colors">Digital Shelf Price Tags (ESL)</a></li>
-              <li><a href="#hardware" className="hover:text-black dark:hover:text-white transition-colors">Silent Receipt Printer &amp; Pinpad</a></li>
+              <li><a href="/#hardware" className="hover:text-black dark:hover:text-white transition-colors">Dual Touchscreen Register</a></li>
+              <li><a href="/#hardware" className="hover:text-black dark:hover:text-white transition-colors">Zebra Bi-Optic Scanner Scale</a></li>
+              <li><a href="/#hardware" className="hover:text-black dark:hover:text-white transition-colors">Handheld Store Scanner</a></li>
+              <li><a href="/#hardware" className="hover:text-black dark:hover:text-white transition-colors">Digital Shelf Price Tags (ESL)</a></li>
+              <li><a href="/#hardware" className="hover:text-black dark:hover:text-white transition-colors">Silent Receipt Printer &amp; Pinpad</a></li>
             </ul>
           </div>
 
@@ -30,11 +30,11 @@ export const AppleFooter: React.FC = () => {
               Produce AI Engine
             </div>
             <ul className="space-y-2">
-              <li><a href="#register-demo" className="hover:text-black dark:hover:text-white transition-colors">0.08s Scale Stabilization</a></li>
-              <li><a href="#register-demo" className="hover:text-black dark:hover:text-white transition-colors">1-Tap EBT SNAP Food Stamps Split</a></li>
-              <li><a href="#ai-invoices" className="hover:text-black dark:hover:text-white transition-colors">AI Vendor Invoice Scanner</a></li>
-              <li><a href="#pillars" className="hover:text-black dark:hover:text-white transition-colors">100% Offline SQLite Resilience</a></li>
-              <li><a href="#pillars" className="hover:text-black dark:hover:text-white transition-colors">Live Mobile Web Backoffice</a></li>
+              <li><a href="/#register-demo" className="hover:text-black dark:hover:text-white transition-colors">0.08s Scale Stabilization</a></li>
+              <li><a href="/#register-demo" className="hover:text-black dark:hover:text-white transition-colors">1-Tap EBT SNAP Food Stamps Split</a></li>
+              <li><a href="/#ai-invoices" className="hover:text-black dark:hover:text-white transition-colors">AI Vendor Invoice Scanner</a></li>
+              <li><a href="/#pillars" className="hover:text-black dark:hover:text-white transition-colors">100% Offline SQLite Resilience</a></li>
+              <li><a href="/#pillars" className="hover:text-black dark:hover:text-white transition-colors">Live Mobile Web Backoffice</a></li>
             </ul>
           </div>
 
@@ -72,8 +72,8 @@ export const AppleFooter: React.FC = () => {
             <span>Copyright &copy; 2026 Produce AI POS Inc. All rights reserved.</span>
           </div>
           <div className="flex gap-4 sm:gap-6 font-mono-telemetry">
-            <a href="#" className="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-black dark:hover:text-white transition-colors">Terms of Service</a>
+            <a href="/privacy-policy" className="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms-of-service" className="hover:text-black dark:hover:text-white transition-colors">Terms of Service</a>
             <a href="#" className="hover:text-black dark:hover:text-white transition-colors">Scale Drivers</a>
           </div>
         </div>

@@ -14,7 +14,7 @@ export const AppleNavbar: React.FC<AppleNavbarProps> = ({ onOpenModal, theme, on
         <div className="max-w-[1340px] mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
           
           {/* Brand Logo */}
-          <a href="#" className="flex items-center group">
+          <a href="/" className="flex items-center group">
             <div className="h-9 sm:h-10 px-2 py-1 rounded-xl bg-black border border-white/10 shadow-xs flex items-center justify-center group-hover:border-emerald-500/40 group-hover:scale-105 transition-all duration-300">
               <img 
                 src="/images/produce_ai_logo.png" 
@@ -26,10 +26,10 @@ export const AppleNavbar: React.FC<AppleNavbarProps> = ({ onOpenModal, theme, on
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-7 text-[13px] font-semibold text-neutral-600 dark:text-neutral-300 tracking-tight">
-            <a href="#pillars" className="hover:text-black dark:hover:text-white transition-colors">
+            <a href="/#pillars" className="hover:text-black dark:hover:text-white transition-colors">
               System Features
             </a>
-            <a href="#faq" className="hover:text-black dark:hover:text-white transition-colors">
+            <a href="/#faq" className="hover:text-black dark:hover:text-white transition-colors">
               FAQs
             </a>
           </nav>
@@ -89,14 +89,14 @@ export const AppleNavbar: React.FC<AppleNavbarProps> = ({ onOpenModal, theme, on
         {mobileMenuOpen && (
           <div className="lg:hidden w-full bg-white/95 dark:bg-[#0c0e12]/95 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800 px-6 py-5 flex flex-col gap-4 text-sm font-semibold text-neutral-800 dark:text-neutral-200 animate-in fade-in slide-in-from-top-2 duration-200">
             <a 
-              href="#pillars" 
+              href="/#pillars" 
               onClick={() => setMobileMenuOpen(false)} 
               className="py-1 hover:text-emerald-600 transition-colors"
             >
               System Features
             </a>
             <a 
-              href="#faq" 
+              href="/#faq" 
               onClick={() => setMobileMenuOpen(false)} 
               className="py-1 hover:text-emerald-600 transition-colors"
             >
