@@ -11,8 +11,6 @@ node_modules
 dist
 dist-ssr
 *.local
-*.tsbuildinfo
-vite.config.ts.timestamp*
 
 # Editor directories and files
 .vscode/*
@@ -20,7 +18,7 @@ vite.config.ts.timestamp*
 .idea
 .DS_Store
 *.suo
-*.ntvsdat
+*.ntvs*
 *.njsproj
 *.sln
 *.sw?

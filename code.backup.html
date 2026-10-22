@@ -1,0 +1,745 @@
+<!DOCTYPE html><html class="light scroll-smooth" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+
+    /* Custom Gradients & Mesh Glow */
+    .hero-glow-blob {
+      background: radial-gradient(circle at 50% 50%, rgba(5, 150, 105, 0.14) 0%, rgba(16, 185, 129, 0.04) 40%, transparent 70%);
+    }
+
+    .glass-capsule {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+    }
+
+    .glass-card-stage {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.85) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 30px 80px -20px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(255,255,255,0.8) inset;
+    }
+
+    /* 3D Elevated Stage Perspective */
+    .perspective-stage {
+      perspective: 1200px;
+    }
+    .stage-monitor {
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+      box-shadow: 0 35px 70px -15px rgba(2, 44, 34, 0.22), 0 10px 25px -5px rgba(15, 23, 42, 0.1);
+    }
+    .stage-monitor:hover {
+      transform: translateY(-4px) rotateX(1deg);
+    }
+
+    .monitor-bezel {
+      border: 11px solid #090d16;
+      border-bottom: 20px solid #090d16;
+    }
+
+    .monitor-pedestal {
+      width: 84px;
+      height: 42px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%);
+      clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.4);
+    }
+    .monitor-pedestal-base {
+      width: 220px;
+      height: 11px;
+      margin: 0 auto;
+      border-radius: 9999px;
+      background: linear-gradient(180deg, #e2e8f0 0%, #94a3b8 100%);
+      box-shadow: 0 16px 30px -4px rgba(15, 23, 42, 0.3);
+    }
+
+    /* Pulse Glow Animation */
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.4); }
+      50% { box-shadow: 0 0 0 12px rgba(5, 150, 105, 0); }
+    }
+    .pulse-emerald {
+      animation: pulseGlow 2.5s infinite;
+    }
+
+    /* Floating micro chip tag */
+    .callout-pill {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.9);
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#032517",
+            "primary-hover": "#063d27",
+            "primary-container": "#0f3d28",
+            "emerald-accent": "#059669",
+            "emerald-bright": "#10b981",
+            "emerald-soft": "#ecfdf5",
+            "border-editorial": "#e2e8f0",
+            "border-editorial-dark": "#cbd5e1",
+            "text-main": "#090d16",
+            "text-muted-editorial": "#475569",
+            "text-light-editorial": "#64748b"
+          },
+          "fontFamily": {
+            "editorial": ["Playfair Display", "Georgia", "serif"],
+            "sans": ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+            "code-telemetry": ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="text-text-main antialiased font-sans selection:bg-emerald-100 selection:text-emerald-950 bg-white min-h-screen">
+<!-- Top Broadcast Notification Strip -->
+<div class="w-full bg-[#032517] text-white py-2 px-4 text-xs z-50 relative border-b border-emerald-900/60">
+
+</div>
+<!-- Header Floating Navigation Capsule -->
+<header class="sticky top-0 left-0 w-full z-40 px-4 sm:px-8 py-3 transition-all duration-300">
+<div class="max-w-[1380px] mx-auto flex items-center justify-between gap-4 glass-capsule rounded-full px-5 py-2.5 shadow-sm">
+<!-- Brand -->
+<a class="flex items-center gap-3 shrink-0" href="#"><div class="h-9 flex items-center"><img alt="Produce AI" class="h-8 sm:h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UpN1Vf8fJCq9Lcyz2FE66yuu9KsNeeKNUcrRMIudM2Ggl2Vr2jcJp-zdcEq3CVhhmpiTNRfeCfjNWQrqXYLS3YYY7R1QQcPDvJIrgqHBtp1EdJE0cGgZiRhl0Q8YPETZs3nU2mJv3lehvfIQ-XiLdlcEzmwZgGc5t4OPw-XKbApxsR0pQgD45zd-sz2BTs5fmGP2sWwZfKyqmCaAU4MI0BFfb_cnCjaAsh19NTyv54fgZMLX53IN0QCFBh"></div></a>
+<!-- Nav Items -->
+<nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-[12px] font-semibold tracking-wider uppercase text-text-muted-editorial">
+
+
+
+
+
+</nav>
+<!-- CTAs -->
+<div class="flex items-center gap-2 sm:gap-3 shrink-0">
+<a class="hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-border-editorial bg-white text-slate-800 text-xs font-semibold hover:border-emerald-600 hover:text-emerald-800 transition-all" href="tel:3472130687">
+<span class="material-symbols-outlined text-[15px] text-emerald-accent">call</span>
+        (347) 213-0687
+      </a>
+<button class="open-modal-trigger inline-flex items-center justify-center px-5 py-2 rounded-full bg-[#032517] text-white text-xs sm:text-[12.5px] font-bold tracking-wide uppercase hover:bg-primary-hover pulse-emerald transition-all shadow-sm">
+        Claim Free Hardware
+      </button>
+</div>
+</div>
+</header>
+<main class="w-full">
+<!-- Modal Form (Hidden by default) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-all duration-300 hidden" id="hardware-modal">
+<div class="relative w-full max-w-2xl rounded-[2.5rem] border border-border-editorial p-6 sm:p-10 shadow-2xl flex flex-col gap-6 max-h-[92vh] overflow-y-auto bg-white">
+<div class="flex items-start justify-between gap-4">
+<div class="flex flex-col gap-2">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-800 self-start text-[11px] font-bold tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Hardware Grant Allocation: 12 Left
+          </div>
+<h3 class="font-editorial text-2xl sm:text-3xl text-slate-900 font-semibold tracking-tight">Reserve Your Free POS Package</h3>
+<p class="text-sm text-text-muted-editorial">Direct store deployment by certified technicians. No upfront hardware capital required.</p>
+</div>
+<button class="w-9 h-9 rounded-full border border-border-editorial bg-slate-50 hover:bg-slate-100 text-text-muted-editorial flex items-center justify-center transition-colors" id="close-modal-btn">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-4" id="lead-form" onsubmit="event.preventDefault(); document.getElementById('form-success-alert').classList.remove('hidden');"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="flex flex-col gap-1.5"><label class="text-xs font-semibold text-slate-800 uppercase tracking-wider">Full Name *</label><input required="" type="text" class="w-full h-11 px-4 rounded-xl border border-border-editorial bg-slate-50 text-text-main placeholder:text-text-light-editorial focus:border-emerald-600 focus:bg-white focus:outline-none text-sm transition-all" placeholder="Marcus Sterling"></div><div class="flex flex-col gap-1.5"><label class="text-xs font-semibold text-slate-800 uppercase tracking-wider">Store / Supermarket Name *</label><input required="" type="text" class="w-full h-11 px-4 rounded-xl border border-border-editorial bg-slate-50 text-text-main placeholder:text-text-light-editorial focus:border-emerald-600 focus:bg-white focus:outline-none text-sm transition-all" placeholder="Bronx Harvest Fresh Market"></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="flex flex-col gap-1.5"><label class="text-xs font-semibold text-slate-800 uppercase tracking-wider">Business Email *</label><input required="" type="email" class="w-full h-11 px-4 rounded-xl border border-border-editorial bg-slate-50 text-text-main placeholder:text-text-light-editorial focus:border-emerald-600 focus:bg-white focus:outline-none text-sm transition-all" placeholder="marcus@bronxharvest.com"></div><div class="flex flex-col gap-1.5"><label class="text-xs font-semibold text-slate-800 uppercase tracking-wider">Phone Number (Scale Tech Call) *</label><input required="" type="tel" class="w-full h-11 px-4 rounded-xl border border-border-editorial bg-slate-50 text-text-main placeholder:text-text-light-editorial focus:border-emerald-600 focus:bg-white focus:outline-none text-sm transition-all" placeholder="(347) 555-0192"></div></div><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="flex flex-col gap-1.5"><label class="text-xs font-semibold text-slate-800 uppercase tracking-wider">Current POS System</label><select class="w-full h-11 px-3 rounded-xl border border-border-editorial bg-slate-50 text-text-main focus:border-emerald-600 focus:bg-white focus:outline-none text-sm"><option value="ncr">NCR / RealPOS</option><option value="clover">Clover Retail</option><option value="square">Square for Retail</option><option value="tec">TEC / Toshiba</option><option value="cas">CAS Scale Station</option><option value="other">Other / Cash Register</option></select></div><div class="flex flex-col gap-1.5"><label class="text-xs font-semibold text-slate-800 uppercase tracking-wider">Checkout Lanes</label><select class="w-full h-11 px-3 rounded-xl border border-border-editorial bg-slate-50 text-text-main focus:border-emerald-600 focus:bg-white focus:outline-none text-sm"><option value="1-2">1-2 lanes</option><option value="3-5">3-5 lanes</option><option value="6+">6+ lanes</option></select></div><div class="flex flex-col gap-1.5"><label class="text-xs font-semibold text-slate-800 uppercase tracking-wider">Store Address / Zip</label><input required="" type="text" class="w-full h-11 px-4 rounded-xl border border-border-editorial bg-slate-50 text-text-main placeholder:text-text-light-editorial focus:border-emerald-600 focus:bg-white focus:outline-none text-sm transition-all" placeholder="Grand Concourse, 10458"></div></div><label class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 border border-border-editorial cursor-pointer hover:bg-emerald-50/40 transition-colors"><input type="checkbox" checked="" class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4"><span class="text-xs font-medium text-slate-800">Request On-Site Zebra Bi-Optic Scale Calibration Demo</span></label><div class="hidden p-4 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-950 text-xs flex items-center gap-2.5 shadow-sm" id="form-success-alert"><span class="material-symbols-outlined text-emerald-600 text-xl">check_circle</span><div class=""><strong class="font-bold block text-slate-950">Application Received!</strong>A Produce AI hardware specialist will call you within 15 minutes.</div></div><button class="w-full py-4 rounded-full bg-[#032517] text-white text-xs sm:text-sm font-bold tracking-wide uppercase hover:bg-primary-hover shadow-lg transition-all flex items-center justify-center gap-2 mt-1" type="submit"><span class="">Claim $3,200 Free Hardware Kit &amp; Schedule Demo</span><span class="material-symbols-outlined text-base">arrow_forward</span></button><div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-text-muted-editorial text-xs text-center pt-1"><span class="flex items-center gap-1 text-slate-700 font-semibold"><span class="material-symbols-outlined text-sm text-emerald-600">verified</span> Zero upfront cost</span><span class="text-slate-300">•</span><span class="flex items-center gap-1 text-slate-700 font-semibold"><span class="material-symbols-outlined text-sm text-emerald-600">handyman</span> 100% free technician setup</span><span class="text-slate-300">•</span><span class="flex items-center gap-1 text-slate-700 font-semibold"><span class="material-symbols-outlined text-sm text-emerald-600">bolt</span> NY/NJ grocers fast-track response in &lt; 15 mins</span></div></form>
+</div>
+</div>
+<!-- HERO SECTION: Masterpiece Editorial Art Direction -->
+<section class="relative w-full pt-10 pb-20 lg:pt-16 lg:pb-28 overflow-hidden bg-white">
+<!-- Clean organic supermarket produce backdrop with exquisite modern editorial treatment -->
+<div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+<img alt="Fresh organic supermarket produce" class="w-full h-full object-cover object-center opacity-40 filter saturate-105" src="https://lh3.googleusercontent.com/aida/AEtjO1XG6SOb-Gj9arNrhMe6tzyKL8uQemJg-WCRWGbFwqIbXG78MmoECJCoF5oolJs_hjuL_6ZCk5tjtdHViqEdy8ixrxAy_fkwQ9MxFQd11WNT7LZYH6jqKpPlVQv7lc920_pvnxm-o3mUmb1etVFFdA-jHBkki9kTMgYPkwisoHOjkHxUKXTj0nZJW2tHBTT64xgnYL4m7Eev5MupjrrGAd5YO8aBLwG5zRivckvcg0wsBJAr11Cve2ipF2YL">
+<!-- Ambient light, micro-grid and luminous gradient veil -->
+<div class="hero-glow-blob absolute -top-40 left-1/2 -translate-x-1/2 w-[1100px] h-[700px] pointer-events-none"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white"></div>
+<div class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-40"></div>
+</div>
+<div class="max-w-[1380px] mx-auto px-4 sm:px-8 relative z-10 flex flex-col items-center text-center">
+<!-- Live Status Badge -->
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-200 bg-emerald-50/80 backdrop-blur-md shadow-xs mb-6">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-sans text-[11.5px] font-bold text-emerald-950 uppercase tracking-widest">Fast, Reliable Supermarket Checkout • Built for Local Grocers</span>
+</div>
+<!-- Headline -->
+<h1 class="font-editorial text-4xl sm:text-5xl lg:text-6xl text-slate-950 leading-[1.12] tracking-tight font-semibold max-w-4xl mb-6">Faster grocery checkout. <span class="italic font-normal font-editorial text-emerald-800">Zero upfront equipment cost.</span></h1>
+<p class="font-sans text-base sm:text-lg text-text-muted-editorial leading-relaxed max-w-2xl mb-8">Produce AI helps cashiers weigh produce in milliseconds, look up items in one tap, and split EBT payments automatically without slowing down the line.</p>
+<!-- High-Converting Dual CTAs -->
+<div class="flex flex-wrap items-center justify-center gap-4 mb-10"><button class="open-modal-trigger px-8 py-4 rounded-full bg-[#032517] text-white text-xs sm:text-sm font-bold tracking-wider uppercase hover:bg-primary-hover shadow-xl pulse-emerald transition-all flex items-center gap-2.5"><span class="">Get Free Hardware Package</span><span class="material-symbols-outlined text-base">arrow_forward</span></button><a class="px-7 py-3.5 rounded-full border border-border-editorial-dark bg-white/90 backdrop-blur-sm text-slate-800 text-xs sm:text-sm font-bold tracking-wider uppercase hover:bg-slate-50 transition-all flex items-center gap-2 shadow-xs" href="#screens"><span class="material-symbols-outlined text-emerald-accent text-lg">play_circle</span>Watch 1-Minute Demo</a></div>
+<!-- Live Floating Scale Readout Widget (Pill) -->
+<div class="w-full max-w-xl mx-auto mb-10">
+
+</div>
+<!-- Social Proof Ticker -->
+<div class="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-text-muted-editorial pt-2 border-t border-slate-200/70 max-w-3xl"><span class="flex items-center gap-1.5 text-slate-900 font-semibold"><span class="material-symbols-outlined text-emerald-accent text-sm">store</span> Used in 160+ Markets</span><span class="text-slate-300">•</span><span class="flex items-center gap-1.5 text-slate-900 font-semibold"><span class="material-symbols-outlined text-emerald-accent text-sm">speed</span> 99.98% Reliable Uptime</span><span class="text-slate-300">•</span><span class="flex items-center gap-1.5 text-slate-900 font-semibold"><span class="material-symbols-outlined text-emerald-accent text-sm">receipt</span> Instant EBT &amp; Card Split</span></div>
+</div>
+</section>
+<!-- WORKSTATION DUAL SHOWCASE (3D Perspective Interactive Stage) -->
+<section class="w-full py-20 lg:py-28 border-y border-border-editorial bg-slate-50/70 relative" id="screens">
+<div class="max-w-[1380px] mx-auto px-4 sm:px-8 flex flex-col gap-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="flex flex-col gap-3 max-w-2xl"><div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-border-editorial bg-white text-slate-800 self-start text-[11px] font-bold uppercase tracking-widest shadow-2xs"><span class="material-symbols-outlined text-sm text-emerald-accent">devices</span>Simple Grocery Workstations</div><h2 class="font-editorial text-3xl sm:text-4xl text-slate-900 font-semibold leading-tight">Simple to Use at the Register. Powerful in the Back Office.</h2><p class="text-sm text-text-muted-editorial leading-relaxed">A cashier screen your staff can learn in 5 minutes, backed by easy cloud inventory.</p></div>
+<!-- Interactive Switcher -->
+<div class="inline-flex p-1.5 rounded-2xl bg-white border border-border-editorial shadow-xs shrink-0" id="workstation-switcher">
+<button class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all bg-[#032517] text-white shadow-xs cursor-pointer flex items-center gap-2" id="tab-cashier" onclick="switchWorkstation('cashier')">
+<span class="material-symbols-outlined text-sm">point_of_sale</span>
+            1. Cashier Lane POS
+          </button>
+<button class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all hover:text-slate-900 text-text-muted-editorial cursor-pointer flex items-center gap-2" id="tab-backoffice" onclick="switchWorkstation('backoffice')">
+<span class="material-symbols-outlined text-sm">dashboard</span>
+            2. Backoffice &amp; Pricebook Hub
+          </button>
+</div>
+</div>
+<!-- WORKSTATION STAGE: DISPLAY 1 (Cashier POS) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center transition-all duration-300" id="panel-cashier">
+<!-- 3D Perspective Hardware Monitor (7 cols) -->
+<div class="lg:col-span-7 flex flex-col items-center perspective-stage relative">
+<!-- Floating callout chips hovering around screen -->
+<div class="hidden sm:flex absolute -top-5 -left-4 z-20 callout-pill px-3 py-1.5 rounded-xl text-[11px] font-bold text-slate-900 items-center gap-1.5 animate-bounce">
+<span class="material-symbols-outlined text-emerald-accent text-sm">qr_code_scanner</span>
+            Bi-Optic 360° Laser + Scale
+          </div>
+<div class="hidden sm:flex absolute top-1/2 -right-6 z-20 callout-pill px-3 py-1.5 rounded-xl text-[11px] font-bold text-slate-900 items-center gap-1.5">
+<span class="material-symbols-outlined text-emerald-accent text-sm">call_split</span>
+            Instant SNAP / EBT Split
+          </div>
+<div class="w-full stage-monitor rounded-[2.2rem] monitor-bezel bg-[#090d16] overflow-hidden group relative">
+<!-- Screen container with realistic cashier view -->
+<div class="relative w-full aspect-[16/10] bg-slate-900 overflow-hidden">
+<img alt="Produce AI POS Cashier Interface" class="w-full h-full object-cover object-top filter blur-[5px] scale-105 transition-all duration-500 group-hover:scale-[1.07]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACa_8NejrGGCYK7aGHcxCrrstvIZHxkd3Z4cSbyxoTirIilsRShQ0J2HExfokH8VztuusCOKK5acwd_mI43NP-HN7gm1-wdaYSeEZmrqREA7i3TW8IvSSUAsGZbxl8DACIJaMLYQJOX9mDfH70cOUW95HMzx8CYN0pI0O2PeGMZc9otSpa1VzkECN6frruRB2HotEG9jII0PQsc16V-VgF5EbwfIFP-8soBXNy2V8MYdZB_D8kzH32oKO7i8PsypxlfO0">
+<div class="absolute inset-0 bg-slate-950/25 backdrop-blur-[2px]"></div>
+<!-- Screen telemetry overlay -->
+<div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg text-white text-[11px] font-code-telemetry flex items-center gap-2 border border-white/10 z-10">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span class="">Zebra MP7000 Serial Link: 0.08s</span>
+</div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-950/85 backdrop-blur-md border border-white/20 text-white shadow-2xl">
+<span class="material-symbols-outlined text-emerald-bright text-base">bolt</span>
+<span class="text-xs font-semibold tracking-wider uppercase font-sans">High-Throughput Cashier Interface</span>
+</div>
+</div>
+<div class="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-lg text-white/90 text-[11px] font-code-telemetry flex items-center gap-2 z-10">
+<span class="">PLU Memory: 1,400 Keys Synced</span>
+</div>
+</div>
+</div>
+<!-- Pedestal -->
+<div class="relative z-10 -mt-0.5">
+<div class="monitor-pedestal"></div>
+<div class="monitor-pedestal-base"></div>
+</div>
+</div>
+<!-- Feature Callouts (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-5"><div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 self-start px-3 py-1 rounded-full border border-emerald-200"><span class="material-symbols-outlined text-base">point_of_sale</span>Front Checkout Terminal</div><h3 class="font-editorial text-2xl sm:text-3xl text-slate-900 font-semibold">Fast Produce Weighing &amp; One-Tap PLU</h3><p class="text-xs sm:text-sm text-text-muted-editorial leading-relaxed">Eliminate long lines during peak hours. Cashiers tap color-coded item tiles or search by name in under a second.</p><div class="flex flex-col gap-3 pt-1"><div class="p-3.5 rounded-2xl bg-white border border-border-editorial flex items-start gap-3.5 shadow-2xs"><div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-lg">grid_view</span></div><div><h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Visual Item Grid</h4><p class="text-xs text-text-muted-editorial leading-relaxed">Instant touch buttons for fruits, vegetables, and bulk goods.</p></div></div><div class="p-3.5 rounded-2xl bg-white border border-border-editorial flex items-start gap-3.5 shadow-2xs"><div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-lg">scale</span></div><div><h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Instant Scale Sync</h4><p class="text-xs text-text-muted-editorial leading-relaxed">Connects directly to Zebra and Magellan scales for instant weights.</p></div></div><div class="p-3.5 rounded-2xl bg-white border border-border-editorial flex items-start gap-3.5 shadow-2xs"><div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-lg">payments</span></div><div><h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Automatic EBT Split</h4><p class="text-xs text-text-muted-editorial leading-relaxed">Grocery and non-grocery items separate automatically at checkout.</p></div></div></div><div class="pt-2"><button class="open-modal-trigger w-full sm:w-auto px-7 py-3 rounded-full bg-[#032517] text-white text-xs font-bold uppercase tracking-wider hover:bg-primary-hover shadow-md transition-all flex items-center justify-center gap-2"><span class="">Request Free In-Store Demo</span><span class="material-symbols-outlined text-sm">arrow_forward</span></button></div></div>
+</div>
+<!-- WORKSTATION STAGE: DISPLAY 2 (Backoffice Hub) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center transition-all duration-300 hidden" id="panel-backoffice">
+<!-- Feature Callouts (5 cols) -->
+<div class="lg:col-span-5 order-2 lg:order-1 flex flex-col gap-5">
+<div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-800 bg-slate-100 self-start px-3 py-1 rounded-full border border-slate-200">
+<span class="material-symbols-outlined text-base">hub</span>Backoffice Workstation
+          </div>
+<h3 class="font-editorial text-2xl sm:text-3xl text-slate-900 font-semibold">
+            Management Hub &amp; Smart Pricebook
+          </h3>
+<p class="text-xs sm:text-sm text-text-muted-editorial leading-relaxed">
+            Monitor real-time grocery profit margins, scan delivery invoices, adjust produce prices across all lanes in 1 tap, and audit shrinkage.
+          </p>
+<div class="flex flex-col gap-3 pt-1">
+<div class="p-3.5 rounded-2xl bg-white border border-border-editorial flex items-start gap-3.5 shadow-2xs">
+<div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">inventory_2</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Live Margin &amp; Inventory Guard</h4>
+<p class="text-xs text-text-muted-editorial leading-relaxed">Real-time inventory levels, hourly department sales, and automatic reorder alerts.</p>
+</div>
+</div>
+<div class="p-3.5 rounded-2xl bg-white border border-border-editorial flex items-start gap-3.5 shadow-2xs">
+<div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">receipt_long</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Wholesale Invoice OCR Digitizer</h4>
+<p class="text-xs text-text-muted-editorial leading-relaxed">Snap a photo of your Hunts Point produce invoice to automatically update cost &amp; shelf price.</p>
+</div>
+</div>
+<div class="p-3.5 rounded-2xl bg-white border border-border-editorial flex items-start gap-3.5 shadow-2xs">
+<div class="w-9 h-9 rounded-xl bg-rose-50 text-rose-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">content_cut</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Shrinkage &amp; Spoilage Audit</h4>
+<p class="text-xs text-text-muted-editorial leading-relaxed">Log bruised avocados or damaged cartons in 2 taps to protect month-end net income.</p>
+</div>
+</div>
+</div>
+<div class="pt-2">
+<button class="open-modal-trigger w-full sm:w-auto px-7 py-3 rounded-full bg-[#032517] text-white text-xs font-bold uppercase tracking-wider hover:bg-primary-hover shadow-md transition-all flex items-center justify-center gap-2">
+<span class="">Unlock Backoffice Portal</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- 3D Perspective Hardware Monitor (7 cols) -->
+<div class="lg:col-span-7 order-1 lg:order-2 flex flex-col items-center perspective-stage relative">
+<div class="hidden sm:flex absolute -top-4 -right-4 z-20 callout-pill px-3 py-1.5 rounded-xl text-[11px] font-bold text-slate-900 items-center gap-1.5">
+<span class="material-symbols-outlined text-emerald-accent text-sm">trending_up</span>
+            Real-time Gross Margin Guard
+          </div>
+<div class="w-full stage-monitor rounded-[2.2rem] monitor-bezel bg-[#090d16] overflow-hidden group relative">
+<div class="relative w-full aspect-[16/10] bg-slate-100 overflow-hidden">
+<img alt="Produce AI Cloud Management Backoffice Hub" class="w-full h-full object-cover object-top filter blur-[5px] scale-105 transition-all duration-500 group-hover:scale-[1.07]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM9TJ1zcHR6NY0Cx5ptn13fURUMNj18_m7O_Uhu6L8FVx5AUYvPUAwUkeZYfRYIqIFSQXiEyRXUdvx8Voep5bEp37SVXxAkDneb4aF8nSl9UO9iSTx1ZsAZvjkAYVYasnd485NDJ5Eb5trDqv6vcxWT69v7M7ixscrgS5cdIgngffK3_Bkt2_q_MPL3I7JG3WJ6Uzo0l0iyfIZO_l5856ot8jX-_ujNkeKZI4VC6PV4liIswNA69sWSm1MJpG2bLTLKkI">
+<div class="absolute inset-0 bg-slate-950/20 backdrop-blur-[2px]"></div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-950/85 backdrop-blur-md border border-white/20 text-white shadow-2xl">
+<span class="material-symbols-outlined text-emerald-bright text-base">cloud_sync</span>
+<span class="text-xs font-semibold tracking-wider uppercase font-sans">Produce AI Backoffice Cloud</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-lg text-white/90 text-[11px] font-code-telemetry flex items-center gap-2 z-10">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="">Live Stores: 3 Lanes Synced</span>
+</div>
+</div>
+</div>
+<!-- Pedestal -->
+<div class="relative z-10 -mt-0.5">
+<div class="monitor-pedestal"></div>
+<div class="monitor-pedestal-base"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SCALE TELEMETRY & SPEED COMPARISON (Data Viz Section) -->
+<section class="w-full py-20 lg:py-24 bg-white border-b border-border-editorial" id="telemetry">
+<div class="max-w-[1380px] mx-auto px-4 sm:px-8 flex flex-col lg:flex-row items-center gap-12 lg:gap-16"><div class="w-full mb-8 rounded-3xl overflow-hidden border border-border-editorial relative h-44 sm:h-72 shadow-sm"><img alt="Modern supermarket produce department with fresh heirloom tomatoes, broccoli, and produce displays" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEk_Dha2qj7a6IbUz7MbyG3MEZvkIKcyT8n__H0uA5Wii1BB3P2d9Z38TEu8q0kQXNVEEK9UK36l3O1y-O-g6cnH4KWTb5TyS9eG_-QgPHvrG0ET_vGu9D6-2LsnubLQJFWNaDRD3rJzULc5RAgfnBzRk1RbCMqh2ocfd8Mxhzor_vyVFYR0l6GANZPAiQj1Etc9Q8c0Yhx_ib0BVcSEFwVbcS1bTJK5bSPJhSgSHW"><div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-transparent flex items-center p-6 sm:p-10"><div class="max-w-md flex flex-col gap-2"><span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 text-[11px] font-bold uppercase tracking-wider self-start"><span class="material-symbols-outlined text-sm">storefront</span>Built for High-Volume Produce Departments</span><h3 class="font-editorial text-2xl sm:text-3xl text-white font-semibold leading-tight">Fast, lag-free scale checkout for every aisle.</h3></div></div></div>
+
+<!-- Live Simulator Card -->
+<div class="w-full lg:w-[480px] shrink-0">
+<div class="relative bg-white rounded-[2.5rem] border border-border-editorial p-7 sm:p-8 shadow-xl overflow-hidden">
+<div class="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-emerald-50/60 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex items-center justify-between pb-3 border-b border-border-editorial">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-sans text-[11px] font-bold tracking-wider uppercase text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">Scale Link Active</span>
+</div>
+<span class="font-code-telemetry text-[11px] font-bold text-text-light-editorial">LANE #01 REGISTER</span>
+</div>
+<div class="flex flex-col gap-1 py-1">
+<span class="text-[11px] uppercase tracking-wider text-text-light-editorial font-bold">Bi-Optic Scanner Platter</span>
+<div class="font-editorial text-2xl text-slate-950 font-semibold" id="register-item-name">Jamaican Yellow Yam</div>
+<div class="flex items-baseline justify-between pt-1">
+<span class="font-code-telemetry text-sm text-emerald-700 font-bold" id="register-item-rate">$2.99 / lb</span>
+<span class="font-sans text-base font-extrabold text-slate-900" id="register-item-total">2.45 lb = $7.33</span>
+</div>
+</div>
+<div class="flex flex-col divide-y divide-border-editorial text-xs">
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 text-text-muted-editorial">
+<span class="material-symbols-outlined text-emerald-accent text-base">eco</span>
+<span class="">Tare Calibration</span>
+</div>
+<span class="font-semibold text-slate-900">0.00 Tare (Instant)</span>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 text-text-muted-editorial">
+<span class="material-symbols-outlined text-emerald-accent text-base">receipt_long</span>
+<span class="">Session Volume</span>
+</div>
+<span class="font-semibold text-slate-900">$4,850.40 (142 orders)</span>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 text-text-muted-editorial">
+<span class="material-symbols-outlined text-emerald-accent text-base">verified</span>
+<span class="">Shrinkage Guard</span>
+</div>
+<span class="font-semibold text-emerald-700">99.8% Protected</span>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 text-text-muted-editorial">
+<span class="material-symbols-outlined text-emerald-accent text-base">wifi_off</span>
+<span class="">Offline Failover</span>
+</div>
+<span class="font-semibold text-slate-900">Dual-Mesh (Continuous Ringing)</span>
+</div>
+</div>
+<div class="pt-2">
+<button class="w-full py-3 px-4 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-950 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs" onclick="simulateScan()">
+<span class="material-symbols-outlined text-base text-emerald-700">autorenew</span>
+<span class="">Click to Simulate Weigh-in (Live Cycle)</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- THE HARDWARE GRANT: White-Glove Gifting Experience -->
+<section class="w-full py-20 lg:py-28 bg-slate-50/60 border-b border-border-editorial" id="hardware">
+<div class="max-w-[1380px] mx-auto px-4 sm:px-8 flex flex-col gap-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="flex flex-col gap-2 max-w-2xl"><div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-800 self-start text-[11px] font-bold uppercase tracking-wider"><span class="material-symbols-outlined text-sm text-emerald-accent">redeem</span>White-Glove Merchant Hardware Grant</div><h2 class="font-editorial text-3xl sm:text-4xl text-slate-900 font-semibold leading-tight">Complete $5,000 Grocery Hardware Setup — 100% Free</h2><p class="text-xs sm:text-sm text-text-muted-editorial">Everything your grocery store needs for rapid checkout. No upfront equipment fees on qualifying merchant accounts.</p></div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold text-slate-900 bg-white border border-border-editorial px-3 py-2 rounded-xl shadow-2xs">
+            $0 Due Today • 100% Free Setup
+          </span>
+<button class="open-modal-trigger shrink-0 px-6 py-2.5 rounded-full bg-[#032517] text-white text-xs font-bold uppercase tracking-wider hover:bg-primary-hover shadow-md transition-all">
+            Claim Grant Bundle
+          </button>
+</div>
+</div>
+<!-- Hardware Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"><div class="relative bg-white rounded-3xl border border-border-editorial p-5 flex flex-col gap-4 shadow-sm hover:border-emerald-600 hover:shadow-lg transition-all group"><div class="w-full h-44 rounded-2xl overflow-hidden relative bg-slate-100"><img alt="Scale and scanner" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0dVL799zUBB8tHnANi8IbxlO1q3iDFqPHwUOzNzBX6z5bFGirol67nhstu4r2A2oModLL4jtbazFn5MZGSRFB-mwKn2pyua4YrdtGPN0mopEMnL_3-1Gku3FTVZPMLhtQdGNIqMCVwjxi4sIzxmyFekqThsfwlRJHJBBGoZQ8KzxcjQI9IRcV0l1foO9sbGXGkE6xOoqM9SZ2iaCVIj-ufuCNA-8Ba4FwNFYrxYWSp_8vPwbqdH19vQ"><span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-slate-950/85 text-emerald-300 text-[11px] font-bold font-code-telemetry shadow-xs border border-white/10">$1,250 Value</span></div><div class="flex flex-col gap-1"><h3 class="font-editorial text-lg text-slate-900 font-semibold">Zebra MP7000 Bi-Optic Scale</h3><p class="text-xs text-text-muted-editorial leading-relaxed">Heavy-duty commercial scale and laser barcode scanner for instant weighing.</p></div><div class="mt-auto pt-3 border-t border-border-editorial flex items-center justify-between text-xs"><span class="inline-flex items-center gap-1.5 text-emerald-700 font-bold"><span class="material-symbols-outlined text-base">check_circle</span>Included in Grant ($0)</span></div></div><div class="relative bg-white rounded-3xl border border-border-editorial p-5 flex flex-col gap-4 shadow-sm hover:border-emerald-600 hover:shadow-lg transition-all group"><div class="w-full h-44 rounded-2xl overflow-hidden relative bg-slate-100"><img alt="Customer display" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwb6cw3OVGKEuJ6gs1SPalJny6hrzYUMsuT2cTphfGEspB76aRp7Vow7kDAJzguROie9rOpLRMEjDafH_gdykM3goMXASSQqbHDn9v7PIxWEtXgNDL0e0XRLQvvtwlk0cRvn7jk5pBLJRTiHQLmdYEPBUU6kFrZomHQdVYklk7a743UKXq1HKI32-OLc3z0rVfUCnJudc_1BpP2QQnKiLdhJHDat8KuJ1vZC7YDLvVbTaMzLK_GKr14Q"><span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-slate-950/85 text-emerald-300 text-[11px] font-bold font-code-telemetry shadow-xs border border-white/10">$750 Value</span></div><div class="flex flex-col gap-1"><h3 class="font-editorial text-lg text-slate-900 font-semibold">15.6" Dual IPS Touchscreens</h3><p class="text-xs text-text-muted-editorial leading-relaxed">Clean dual displays for your cashier and customer with clear itemized pricing.</p></div><div class="mt-auto pt-3 border-t border-border-editorial flex items-center justify-between text-xs"><span class="inline-flex items-center gap-1.5 text-emerald-700 font-bold"><span class="material-symbols-outlined text-base">check_circle</span>Included in Grant ($0)</span></div></div><div class="relative bg-white rounded-3xl border border-border-editorial p-5 flex flex-col gap-4 shadow-sm hover:border-emerald-600 hover:shadow-lg transition-all group"><div class="w-full h-44 rounded-2xl overflow-hidden relative bg-slate-100"><img alt="POS Terminal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtS7gVTIRtUvCtZExgyaYoCmtwLKGVfpeEW20KB3xr89tMffJm0bsNHbCPFO40fGbO75lme57ia7y_iBU75QPKvW_eRApE81YOj9q5ALr0gBQMLo2p5Ex3gkku0YDoj1tgczV8_VYmbYB9FS72Z7ka25_EgyYRyXbDD2X_kYFMtpvMvqLjatqvB2PH1uE0c5FkrjIGiNGBqOGbGZ3IBIu7vNEVX3MjWEdnC2J9acilA2Dm_Cs58iLvHQ"><span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-slate-950/85 text-emerald-300 text-[11px] font-bold font-code-telemetry shadow-xs border border-white/10">$700 Value</span></div><div class="flex flex-col gap-1"><h3 class="font-editorial text-lg text-slate-900 font-semibold">High-Speed Thermal Receipt Printer</h3><p class="text-xs text-text-muted-editorial leading-relaxed">Commercial quiet printer designed for busy grocery lines without jams.</p></div><div class="mt-auto pt-3 border-t border-border-editorial flex items-center justify-between text-xs"><span class="inline-flex items-center gap-1.5 text-emerald-700 font-bold"><span class="material-symbols-outlined text-base">check_circle</span>Included in Grant ($0)</span></div></div><div class="relative bg-white rounded-3xl border border-border-editorial p-5 flex flex-col gap-4 shadow-sm hover:border-emerald-600 hover:shadow-lg transition-all group"><div class="w-full h-44 rounded-2xl overflow-hidden relative bg-slate-100"><img alt="EBT Pinpad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgNk2Rys4QlFO1qdEGdG_RXcwiSVWuROPBzUuJk97MV8H7fVJ6pW7ObcWVfaIDaY0LVSNomxZ1DyZp2mWFlCcGcwGqr_h0SOaKXUHwki_5OIvSB8c3Tmu2XZX6KwE9sDmkrGDGRv2OULF4v74VvgQuTN7ZeASX8rR2iIwUBKOY0PG5axfdtdPCKqVFNeFNupFaoCnSyLXpkegwqFJt3XIlYw3_EH46Y25qTHGbQ8VWVw2rMOu_Btegtw"><span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-slate-950/85 text-emerald-300 text-[11px] font-bold font-code-telemetry shadow-xs border border-white/10">$500 Value</span></div><div class="flex flex-col gap-1"><h3 class="font-editorial text-lg text-slate-900 font-semibold">EBT / SNAP / Apple Pay Card Reader</h3><p class="text-xs text-text-muted-editorial leading-relaxed">Secure contactless chip, PIN pad, and mobile tap reader.</p></div><div class="mt-auto pt-3 border-t border-border-editorial flex items-center justify-between text-xs"><span class="inline-flex items-center gap-1.5 text-emerald-700 font-bold"><span class="material-symbols-outlined text-base">check_circle</span>Included in Grant ($0)</span></div></div></div>
+<div class="w-full rounded-3xl overflow-hidden border border-border-editorial bg-white p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6 shadow-xs"><div class="w-full md:w-1/2 h-52 sm:h-64 rounded-2xl overflow-hidden relative"><img alt="Vibrant fresh supermarket produce with kale, bell peppers, carrots, beets, and lemons" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOC8sn4g3_juNz16XeNG05vgOGrCoeFVMe1KIPZy-Ndy_wzTH4Uqrp7K4YVBrM--VeAiEOCoGvR5RCr0SvzsGiQx1UvOGGpg_DDGaG8Nnn8PgyvaRlH3xqNW8EvwlIsPMsUTKZByNY1FqO02osDpoZd3EsRh7KqMsdKlW3Ac4IeUwNBvK6fZYZAX_Ax763ifCzCPKe7giyqkEZXxULDXhax9_v5atuMDfJonVKv-IB"></div><div class="w-full md:w-1/2 flex flex-col gap-3 text-left"><div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider self-start"><span class="material-symbols-outlined text-sm">check_circle</span>Certified for Fresh Supermarkets</div><h3 class="font-editorial text-2xl sm:text-3xl text-slate-900 font-semibold leading-tight">Engineered for busy produce counters.</h3><p class="text-xs sm:text-sm text-text-muted-editorial leading-relaxed">From leafy greens and root vegetables to deli items and bulk spices, Produce AI auto-detects tare weights and rings up customers 3x faster than traditional cash registers.</p><div class="pt-1"><button class="open-modal-trigger inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#032517] text-white text-xs font-bold uppercase tracking-wider hover:bg-primary-hover shadow-sm transition-all"><span class="">Claim Your Free Hardware Grant</span><span class="material-symbols-outlined text-sm">arrow_forward</span></button></div></div></div></div>
+</section>
+<!-- ROI & DIRECT COMPARISON: Legacy vs Produce AI -->
+<section class="w-full py-20 lg:py-24 bg-white" id="comparison">
+<div class="max-w-[1200px] mx-auto px-4 sm:px-8 flex flex-col gap-10">
+<div class="flex flex-col items-center text-center gap-2">
+<span class="font-sans text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase tracking-widest">
+          Hardware &amp; Software ROI
+        </span>
+<h2 class="font-editorial text-3xl sm:text-4xl text-slate-900 font-semibold tracking-tight">
+          How Produce AI Outperforms Legacy Registers
+        </h2>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse rounded-2xl overflow-hidden shadow-xs border border-border-editorial"><thead class=""><tr class="bg-slate-50 text-xs font-bold uppercase tracking-wider text-slate-700 border-b border-border-editorial"><th class="py-4 px-5">Feature</th><th class="py-4 px-5 bg-emerald-50/70 text-emerald-950 border-x border-emerald-200">Produce AI</th><th class="py-4 px-5 text-slate-500">Clover / Square Retail</th><th class="py-4 px-5 text-slate-500">Traditional NCR Registers</th></tr></thead><tbody class="divide-y divide-border-editorial text-xs sm:text-sm"><tr><td class="py-4 px-5 font-semibold text-slate-900">Scale Weigh-In Speed</td><td class="py-4 px-5 bg-emerald-50/40 font-bold text-emerald-700 border-x border-emerald-200 flex items-center gap-1"><span class="material-symbols-outlined text-base text-emerald-600">check_circle</span> 0.08 sec (Instant)</td><td class="py-4 px-5 text-slate-600">2.5 to 3.5 sec lag</td><td class="py-4 px-5 text-slate-600">Requires manual typing</td></tr><tr><td class="py-4 px-5 font-semibold text-slate-900">Upfront Equipment Cost</td><td class="py-4 px-5 bg-emerald-50/40 font-bold text-emerald-700 border-x border-emerald-200 flex items-center gap-1"><span class="material-symbols-outlined text-base text-emerald-600">check_circle</span> $0 (100% Free Grant)</td><td class="py-4 px-5 text-slate-600">$2,400+ per checkout lane</td><td class="py-4 px-5 text-slate-600">$4,500+ per checkout lane</td></tr><tr><td class="py-4 px-5 font-semibold text-slate-900">EBT / Food Stamp Separation</td><td class="py-4 px-5 bg-emerald-50/40 font-bold text-emerald-700 border-x border-emerald-200 flex items-center gap-1"><span class="material-symbols-outlined text-base text-emerald-600">check_circle</span> 1-Tap Automatic Split</td><td class="py-4 px-5 text-slate-600">Manual cashier separation</td><td class="py-4 px-5 text-slate-600">Complicated sub-total keys</td></tr><tr><td class="py-4 px-5 font-semibold text-slate-900">Works When Internet Drops</td><td class="py-4 px-5 bg-emerald-50/40 font-bold text-emerald-700 border-x border-emerald-200 flex items-center gap-1"><span class="material-symbols-outlined text-base text-emerald-600">check_circle</span> Always Keeps Ringing</td><td class="py-4 px-5 text-slate-600">Slows down or freezes</td><td class="py-4 px-5 text-slate-600">Needs local server restart</td></tr><tr><td class="py-4 px-5 font-semibold text-slate-900">In-Person Store Support</td><td class="py-4 px-5 bg-emerald-50/40 font-bold text-emerald-700 border-x border-emerald-200 flex items-center gap-1"><span class="material-symbols-outlined text-base text-emerald-600">check_circle</span> Same-Day Local Technician</td><td class="py-4 px-5 text-slate-600">Phone call center only</td><td class="py-4 px-5 text-slate-600">$180/hour service fee</td></tr></tbody></table>
+</div>
+</div>
+</section>
+<!-- GROCER TESTIMONIALS & TRUST -->
+<section class="w-full py-20 bg-slate-50 border-y border-border-editorial">
+<div class="max-w-[1380px] mx-auto px-4 sm:px-8 flex flex-col gap-12">
+<div class="flex flex-col items-center text-center gap-2">
+<span class="font-sans text-[11px] font-bold text-slate-600 bg-white border border-border-editorial px-3 py-1 rounded-full uppercase tracking-widest shadow-2xs">
+          Verified Grocer Results
+        </span>
+<h2 class="font-editorial text-3xl sm:text-4xl text-slate-900 font-semibold tracking-tight">
+          Trusted in Over 160 High-Volume Markets
+        </h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white rounded-3xl p-7 border border-border-editorial shadow-xs flex flex-col justify-between gap-6">
+<div class="flex flex-col gap-3">
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<p class="text-xs sm:text-sm text-text-muted-editorial italic leading-relaxed">
+              "On busy Saturday afternoons our produce line used to stretch 15 carts back. The instant tare on the Zebra scale cut register checkout times by 40% immediately."
+            </p>
+</div>
+<div class="flex items-center gap-3 pt-3 border-t border-border-editorial">
+<div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center">BM</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900">Sal V.</h4>
+<p class="text-[11px] text-text-light-editorial">Bronx Organic Market, Grand Concourse</p>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-3xl p-7 border border-border-editorial shadow-xs flex flex-col justify-between gap-6">
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<p class="text-xs sm:text-sm text-text-muted-editorial italic leading-relaxed">
+            "The free hardware grant saved us over $6,500 across two registers. The technician came directly to our store in Queens and calibrated our scale before our morning rush."
+          </p>
+<div class="flex items-center gap-3 pt-3 border-t border-border-editorial">
+<div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center">QF</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900">Dimitri K.</h4>
+<p class="text-[11px] text-text-light-editorial">Queens Fresh Supermarket, Astoria</p>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-3xl p-7 border border-border-editorial shadow-xs flex flex-col justify-between gap-6">
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<p class="text-xs sm:text-sm text-text-muted-editorial italic leading-relaxed">
+            "Automatic SNAP item separation is a game changer for our cashiers. No more voiding tickets or manual calculations when customers pay with EBT."
+          </p>
+<div class="flex items-center gap-3 pt-3 border-t border-border-editorial">
+<div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center">HM</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900">Marta G.</h4>
+<p class="text-[11px] text-text-light-editorial">Hudson Valley Harvest Market, White Plains</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Big Closing Conversion Banner -->
+<section class="w-full py-16 lg:py-24 bg-white">
+<div class="max-w-[1380px] mx-auto px-4 sm:px-8">
+<div class="w-full bg-[#032517] rounded-[3rem] p-8 sm:p-16 flex flex-col items-center text-center gap-6 shadow-2xl relative overflow-hidden text-white">
+<div class="hero-glow-blob absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] pointer-events-none opacity-40"></div>
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-white/10 text-emerald-300 text-xs font-bold uppercase tracking-wider relative z-10">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Limited Monthly NY/NJ Allocation: 12 Kits Left
+        </div>
+<h2 class="font-editorial text-3xl sm:text-4xl lg:text-5xl text-white font-semibold tracking-tight relative z-10 max-w-3xl leading-tight">Claim Your Supermarket's Free $5,000&nbsp; Hardware Setup</h2>
+<p class="text-sm sm:text-base text-slate-300 max-w-xl relative z-10 leading-relaxed">
+          Zero upfront cost. Free on-site technician delivery, scale calibration, and staff training. Experience sub-second checkout speeds this week.
+        </p>
+<div class="flex flex-wrap items-center justify-center gap-4 relative z-10 pt-3">
+<button class="open-modal-trigger px-8 py-4 rounded-full bg-emerald-500 text-slate-950 text-xs sm:text-sm font-extrabold uppercase tracking-widest hover:bg-emerald-400 shadow-lg transition-all flex items-center gap-2">
+<span class="">Lock In Free Hardware Kit</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+<a class="px-7 py-3.5 rounded-full border border-white/20 text-white text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-white/10 transition-all flex items-center gap-2" href="tel:3472130687">
+<span class="material-symbols-outlined text-emerald-400 text-base">call</span>
+            Call (347) 213-0687
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="w-full py-20 lg:py-24 bg-gradient-to-b from-white to-slate-50 border-t border-border-editorial relative overflow-hidden" id="grant-application"><div class="max-w-[1380px] mx-auto px-4 sm:px-8"></div></section><section class="w-full py-16 lg:py-20 border-t border-border-editorial bg-slate-50/50" id="faq">
+<div class="max-w-[840px] mx-auto px-4 sm:px-8 flex flex-col gap-10">
+<div class="flex flex-col items-center text-center gap-2">
+<span class="font-sans text-[11px] font-bold text-slate-600 bg-white border border-slate-200 px-3 py-1 rounded-full uppercase tracking-widest">
+          Grocer FAQ
+        </span>
+<h2 class="font-editorial text-2xl sm:text-3xl text-slate-900 font-semibold tracking-tight">Frequently Asked Questions</h2>
+</div>
+<div class="flex flex-col gap-4" id="faq-accordion">
+<div class="faq-item bg-white rounded-2xl border border-border-editorial p-6 transition-all duration-200 shadow-xs">
+<button class="faq-btn w-full flex items-center justify-between text-left gap-4 font-editorial text-lg sm:text-xl text-slate-900 font-semibold cursor-pointer">
+<span class="">Does Produce AI POS connect directly to hardware weight scales?</span>
+<span class="material-symbols-outlined faq-chevron text-2xl transition-transform duration-200 text-emerald-accent">expand_less</span>
+</button>
+<div class="faq-content pt-3 text-xs sm:text-sm text-text-muted-editorial leading-relaxed">
+            Yes! Produce AI POS features direct integration with Zebra MP7000, Magellan, CAS, and common RS-232 serial/USB scale bridges. Weight is registered in 0.08s without manually keying tare values.
+          </div>
+</div>
+<div class="faq-item bg-white rounded-2xl border border-border-editorial p-6 transition-all duration-200 shadow-xs">
+<button class="faq-btn w-full flex items-center justify-between text-left gap-4 font-editorial text-lg sm:text-xl text-slate-900 font-semibold cursor-pointer">
+<span class="">What happens if the internet goes down during busy store hours?</span>
+<span class="material-symbols-outlined faq-chevron text-2xl transition-transform duration-200 text-text-light-editorial">expand_more</span>
+</button>
+<div class="faq-content pt-3 text-xs sm:text-sm text-text-muted-editorial leading-relaxed hidden">
+            The system runs on an automatic dual-mesh local offline architecture. Cashiers keep scanning, weighing, and taking cash or card transactions without lag. Sales auto-reconcile to the cloud database the moment connection is restored.
+          </div>
+</div>
+<div class="faq-item bg-white rounded-2xl border border-border-editorial p-6 transition-all duration-200 shadow-xs">
+<button class="faq-btn w-full flex items-center justify-between text-left gap-4 font-editorial text-lg sm:text-xl text-slate-900 font-semibold cursor-pointer">
+<span class="">Does Produce AI POS support EBT SNAP, WIC, and OTC payments?</span>
+<span class="material-symbols-outlined faq-chevron text-2xl transition-transform duration-200 text-text-light-editorial">expand_more</span>
+</button>
+<div class="faq-content pt-3 text-xs sm:text-sm text-text-muted-editorial leading-relaxed hidden">
+            Full certified compliance is built-in. If an order mixes produce, meats, and household items, the terminal automatically segregates SNAP-eligible food and guides the customer through split payments with zero merchant transaction surcharges.
+          </div>
+</div>
+<div class="faq-item bg-white rounded-2xl border border-border-editorial p-6 transition-all duration-200 shadow-xs">
+<button class="faq-btn w-full flex items-center justify-between text-left gap-4 font-editorial text-lg sm:text-xl text-slate-900 font-semibold cursor-pointer">
+<span class="">Can we access backoffice reports and price changes from home?</span>
+<span class="material-symbols-outlined faq-chevron text-2xl transition-transform duration-200 text-text-light-editorial">expand_more</span>
+</button>
+<div class="faq-content pt-3 text-xs sm:text-sm text-text-muted-editorial leading-relaxed hidden">
+            Yes. The responsive backoffice portal works seamlessly on iPhones, Android devices, tablets, and desktop computers. You can update produce prices across all terminals, track hourly volume, and audit employee shifts in real time.
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive JavaScript handlers -->
+<script>
+    // Workstation Switcher for the 3D Stage Section
+    function switchWorkstation(target) {
+      const panelCashier = document.getElementById('panel-cashier');
+      const panelBackoffice = document.getElementById('panel-backoffice');
+      const btnCashier = document.getElementById('tab-cashier');
+      const btnBackoffice = document.getElementById('tab-backoffice');
+
+      if (target === 'cashier') {
+        panelCashier.classList.remove('hidden');
+        panelBackoffice.classList.add('hidden');
+        
+        btnCashier.classList.remove('text-text-muted-editorial');
+        btnCashier.classList.add('bg-[#032517]', 'text-white', 'shadow-xs');
+        
+        btnBackoffice.classList.remove('bg-[#032517]', 'text-white', 'shadow-xs');
+        btnBackoffice.classList.add('text-text-muted-editorial');
+      } else {
+        panelCashier.classList.add('hidden');
+        panelBackoffice.classList.remove('hidden');
+        
+        btnBackoffice.classList.remove('text-text-muted-editorial');
+        btnBackoffice.classList.add('bg-[#032517]', 'text-white', 'shadow-xs');
+        
+        btnCashier.classList.remove('bg-[#032517]', 'text-white', 'shadow-xs');
+        btnCashier.classList.add('text-text-muted-editorial');
+      }
+    }
+
+    // Modal Triggers
+    const modal = document.getElementById('hardware-modal');
+    const triggers = document.querySelectorAll('.open-modal-trigger');
+    const closeBtn = document.getElementById('close-modal-btn');
+
+    triggers.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.remove('hidden');
+      });
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+      });
+    }
+
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.add('hidden');
+      });
+    }
+
+    // Accordion
+    const faqButtons = document.querySelectorAll('.faq-btn');
+    faqButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.parentElement.querySelector('.faq-content');
+        const chevron = btn.querySelector('.faq-chevron');
+        const isClosed = content.classList.contains('hidden');
+
+        document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.faq-chevron').forEach(ch => {
+          ch.textContent = 'expand_more';
+          ch.classList.remove('text-emerald-accent');
+          ch.classList.add('text-text-light-editorial');
+        });
+
+        if (isClosed) {
+          content.classList.remove('hidden');
+          chevron.textContent = 'expand_less';
+          chevron.classList.add('text-emerald-accent');
+          chevron.classList.remove('text-text-light-editorial');
+        }
+      });
+    });
+
+    // Register Simulator
+    const items = [
+      { name: "Organic Honeycrisp Apples", price: "$1.99 / lb", weight: "1.45 lb", total: "$2.89" },
+      { name: "Hass Avocado (Mexico)", price: "$1.49 / lb", weight: "1.80 lb", total: "$2.68" },
+      { name: "Plantains (Green)", price: "$0.89 / lb", weight: "3.20 lb", total: "$2.85" },
+      { name: "Roma Plum Tomatoes", price: "$1.99 / lb", weight: "2.10 lb", total: "$4.18" },
+      { name: "Jamaican Yellow Yam", price: "$2.99 / lb", weight: "2.45 lb", total: "$7.33" }
+    ];
+    let currentIndex = 0;
+
+    function simulateScan() {
+      currentIndex = (currentIndex + 1) % items.length;
+      const current = items[currentIndex];
+      const nameElem = document.getElementById('register-item-name');
+      const rateElem = document.getElementById('register-item-rate');
+      const totalElem = document.getElementById('register-item-total');
+
+      if (nameElem) nameElem.textContent = current.name;
+      if (rateElem) rateElem.textContent = current.price;
+      if (totalElem) totalElem.textContent = `${current.weight} = ${current.total}`;
+    }
+  </script>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-border-editorial text-text-muted-editorial bg-slate-50">
+<div class="max-w-[1380px] mx-auto px-4 sm:px-8 py-16 flex flex-col gap-12">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+<div class="lg:col-span-2 flex flex-col gap-4">
+<div class="flex items-center gap-3"><div class="flex items-center gap-2"><img alt="Produce AI" class="h-8 sm:h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UpN1Vf8fJCq9Lcyz2FE66yuu9KsNeeKNUcrRMIudM2Ggl2Vr2jcJp-zdcEq3CVhhmpiTNRfeCfjNWQrqXYLS3YYY7R1QQcPDvJIrgqHBtp1EdJE0cGgZiRhl0Q8YPETZs3nU2mJv3lehvfIQ-XiLdlcEzmwZgGc5t4OPw-XKbApxsR0pQgD45zd-sz2BTs5fmGP2sWwZfKyqmCaAU4MI0BFfb_cnCjaAsh19NTyv54fgZMLX53IN0QCFBh"></div></div>
+<p class="text-xs sm:text-sm text-text-muted-editorial max-w-sm leading-relaxed">
+          Enterprise point-of-sale engineered for high-velocity produce markets, supermarkets, and specialty food stores. Sub-second weighing and synchronized grocery intelligence.
+        </p>
+<div class="flex flex-col gap-1.5 text-xs text-text-muted-editorial pt-2">
+<div class="flex items-center gap-2 text-slate-900 font-semibold">
+<span class="material-symbols-outlined text-emerald-accent text-sm">location_on</span>3508 White Plains Road, Bronx, NY 10467
+          </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-accent text-sm">call</span>Direct: (347) 213-0687
+          </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-accent text-sm">mail</span>enterprise@produceai-pos.com
+          </div>
+</div>
+</div>
+<div class="flex flex-col gap-2.5">
+<div class="text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-1">Architecture</div>
+<a class="text-xs hover:text-emerald-700 transition-colors" href="#screens">Produce Cashier Screen</a>
+<a class="text-xs hover:text-emerald-700 transition-colors" href="#screens">Management Hub &amp; Backoffice</a>
+<a class="text-xs hover:text-emerald-700 transition-colors" href="#telemetry">Scale Bridge Telemetry</a>
+<a class="text-xs hover:text-emerald-700 transition-colors" href="#hardware">Dual IPS Customer Screens</a>
+<a class="text-xs hover:text-emerald-700 transition-colors" href="#hardware">Zero Upfront Hardware Plan</a>
+</div>
+<div class="flex flex-col gap-2.5">
+<div class="text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-1">Certified Hardware</div>
+<div class="flex items-center gap-2 text-xs"><span class="material-symbols-outlined text-emerald-accent text-sm">check</span>Zebra MP7000 Bi-Optic</div>
+<div class="flex items-center gap-2 text-xs"><span class="material-symbols-outlined text-emerald-accent text-sm">check</span>15.6" Dual Touch Displays</div>
+<div class="flex items-center gap-2 text-xs"><span class="material-symbols-outlined text-emerald-accent text-sm">check</span>Electronic Shelf Labels</div>
+<div class="flex items-center gap-2 text-xs"><span class="material-symbols-outlined text-emerald-accent text-sm">check</span>High-Speed Thermal Printers</div>
+<div class="flex items-center gap-2 text-xs"><span class="material-symbols-outlined text-emerald-accent text-sm">check</span>EBT / SNAP Pinpads</div>
+</div>
+<div class="flex flex-col gap-2.5">
+<div class="text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-1">Compliance</div>
+<div class="p-3 rounded-2xl bg-white border border-border-editorial flex flex-col gap-1.5 shadow-xs">
+<div class="flex items-center gap-1.5 text-slate-900 text-[11px] font-bold"><span class="material-symbols-outlined text-sm text-emerald-accent">verified_user</span>PCI-DSS Level 1</div>
+<div class="flex items-center gap-1.5 text-slate-900 text-[11px] font-bold"><span class="material-symbols-outlined text-sm text-emerald-accent">payments</span>EBT &amp; SNAP Approved</div>
+<div class="flex items-center gap-1.5 text-slate-900 text-[11px] font-bold"><span class="material-symbols-outlined text-sm text-emerald-accent">eco</span>USDA / WIC Compliant</div>
+</div>
+<p class="text-[11px] text-text-light-editorial leading-tight pt-1">Dual-mesh failover kernel enabled for continuous uninterrupted trade.</p>
+</div>
+</div>
+<div class="pt-8 border-t border-border-editorial flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-light-editorial">
+<p class="">© 2025 Produce AI POS Systems Inc. All rights reserved.</p>
+<div class="flex items-center gap-5">
+<a class="hover:text-slate-900 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-slate-900 transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-slate-900 transition-colors" href="#">Merchant Agreement</a>
+<a class="hover:text-slate-900 transition-colors" href="#">Fiscal Compliance</a>
+</div>
+</div>
+</div>
+</footer>
+
+
+
+
+</body></html>
