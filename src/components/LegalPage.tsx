@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 
 const CONTACT_EMAIL = 'sharmabhavya400@gmail.com';
-const EFFECTIVE_DATE = 'October 22, 2026';
 
 interface LegalSection {
   title: string;
   paragraphs?: string[];
   bullets?: string[];
+  closing?: string;
 }
 
 interface LegalDocument {
   eyebrow: string;
   title: string;
   accent: string;
-  intro: string;
+  effectiveDate: string;
+  intro: string[];
   sections: LegalSection[];
 }
 
@@ -21,72 +22,126 @@ const PRIVACY: LegalDocument = {
   eyebrow: 'DATA PRIVACY & PROTECTION',
   title: 'Privacy',
   accent: 'Policy.',
-  intro:
-    'This Privacy Policy explains what information Produce AI POS Inc. ("Produce AI", "we", "us") collects through the Produce AI POS apps, register software, web backoffice and this website (together, the "Service"), how we use it, who we share it with, how long we keep it, and the choices you have — including how to delete your data.',
+  effectiveDate: 'October 23, 2026',
+  intro: [
+    'This Privacy Policy explains what information Produce AI POS Inc. ("Produce AI", "we", "us") collects through the Produce AI POS mobile apps, register software, web backoffice and this website (together, the "Service"), how we use it, who we share it with, how long we keep it, and the choices you have, including how to delete your data.',
+    'The Service is used by businesses ("Stores"). Stores enter information about their staff and their own customers into the Service. For that information, the Store decides what is collected and why, and we process it on the Store\'s behalf. If you are a customer of a Store, please contact that Store about your information.'
+  ],
   sections: [
     {
       title: 'Information We Collect',
-      paragraphs: ['We only collect information needed to run your store\'s point of sale and backoffice:'],
+      paragraphs: ['We only collect information needed to run a Store\'s point of sale and backoffice:'],
       bullets: [
-        'Account & Contact Information — business name, store address, owner and staff names, email address, phone number and login credentials you provide when you sign up or request hardware.',
-        'Store & Transaction Data — sales, items, PLU codes, prices, weights, discounts, tender types, refunds, shift and cashier activity logs.',
-        'Inventory & Vendor Data — products, stock levels, purchase prices and vendor invoices you scan or upload for AI digitization.',
-        'Device & Diagnostic Data — device model, operating system, app version, scale and printer connection events, crash logs and performance data.',
-        'Camera Access — used only when you choose to scan a barcode or vendor invoice. Images are processed for that purpose only.',
-        'Website Data — information you submit through forms on this site, such as the hardware reservation form.'
+        'Account & Contact Information: business name, store address, owner name, email address, phone number and the details you provide when you sign up or request hardware.',
+        'Staff Information: staff names, roles, access levels and permissions, sign-in PINs (stored only in hashed form, never in plain text), time-clock entries recorded when staff sign in and out, and activity logs of actions taken in the Service.',
+        'Store Customer Information (entered by the Store): customer name, phone number, email address, business address, tax ID, tax-exemption certificates, loyalty membership and points, purchase history, store credit or customer loan balances, and marketing preferences.',
+        'Store & Transaction Data: sales, items, PLU codes, prices, weights, discounts, tender types, refunds, returns, held orders, shift and cashier activity.',
+        'Inventory & Vendor Data: products, stock levels, purchase prices, shrinkage records, vendors and the vendor invoices you scan or upload.',
+        'Files & Photos You Choose: invoice photos and documents (PDF, CSV, XLSX), tax-exemption certificates, product and label images, and advertising images or videos for customer displays. We only receive files you select.',
+        'Device & Diagnostic Data: device model, operating system, app version, printer, scale and scanner connection events, and error and performance information.',
+        'Website Data: information you submit through forms on this website, such as the hardware reservation form.'
       ]
+    },
+    {
+      title: 'Device Permissions',
+      paragraphs: ['The app asks for these permissions only when a feature needs them:'],
+      bullets: [
+        'Camera: to scan barcodes and photograph vendor invoices, only when you open the scanner. Images are used only for that purpose.',
+        'Photos & Files: to attach invoice images, tax-exemption certificates and advertising media you choose.',
+        'Bluetooth & Local Network: to find and print on label printers and connect to store hardware on your store\'s network.',
+        'Location (Android 11 and earlier only): Android requires this permission to search for nearby Bluetooth printers. We do not collect, store or share your location.',
+        'Built-in Barcode Scanners: on handheld devices, the app reads scans from the device\'s scanner only while the app is open.'
+      ],
+      closing: 'You can turn off any permission in your device settings. The related feature will stop working until it is turned back on.'
     },
     {
       title: 'How We Collect Information',
       bullets: [
-        'Directly from you when you create an account, fill out a form, or contact support.',
-        'Automatically from the register, scale, scanner and app while you use the Service.',
+        'Directly from you when you create an account, add staff or customers, upload files, fill out a form, or contact support.',
+        'Automatically from the register, scale, scanner, printer and app while you use the Service.',
         'From payment processors, limited to the transaction status and the last four digits of a card, for reconciliation.'
       ]
     },
     {
       title: 'How We Use Information',
       bullets: [
-        'To provide, operate and maintain the POS, scale integration, offline sync and backoffice.',
-        'To generate sales reports, Z-reports, profit dashboards and inventory updates for your store.',
-        'To digitize vendor invoices you upload and update your cost and pricing records.',
+        'To provide, operate and maintain the POS, scale and printer integration, offline sync and backoffice.',
+        'To sign staff in, apply their roles and permissions, and keep time-clock and activity records.',
+        'To generate sales reports, Z-reports, profit dashboards and inventory updates for the Store.',
+        'To read vendor invoices you upload and update cost and pricing records.',
+        'To run the Store\'s loyalty program and send the marketing messages the Store creates (see Section 05).',
         'To provide customer support, installation, scale calibration and hardware service.',
         'To detect, prevent and fix fraud, security incidents and technical problems.',
         'To comply with legal, tax, Weights & Measures and payment network obligations.'
       ]
     },
     {
+      title: 'Store Customers & Marketing Messages',
+      paragraphs: [
+        'Stores can use the Service to manage their customers and send SMS, email or WhatsApp messages about offers and their loyalty program.'
+      ],
+      bullets: [
+        'Messages are sent only on the Store\'s instructions and only to customers who have agreed to receive them. The Store is responsible for collecting that consent.',
+        'Customers can stop SMS messages by replying STOP, and can unsubscribe from emails using the link in each email. They can also ask the Store to remove them.',
+        'We do not use Store customer information to market our own products, and we never sell it.'
+      ]
+    },
+    {
+      title: 'AI Processing',
+      paragraphs: [
+        'When you scan or upload a vendor invoice, the file is processed by artificial intelligence to read the vendor, invoice number, items and prices, so you can review and save them. Files are used only to read that invoice. Nothing is saved to your records until you confirm it.'
+      ]
+    },
+    {
       title: 'Payment Card Data',
       paragraphs: [
-        'Produce AI POS does not store full card numbers, CVV codes or magnetic stripe data on registers or on our servers. Card payments are handled by PCI-DSS Level 1 certified payment terminals and processors. EBT SNAP and WIC transactions are routed through authorized benefit processors.'
+        'Produce AI POS does not store full card numbers, CVV codes or magnetic stripe data on registers, devices or our servers. Card payments are handled by PCI-DSS Level 1 certified payment terminals and processors. EBT SNAP and WIC transactions are routed through authorized benefit processors.'
       ]
     },
     {
       title: 'Sharing & Third Parties',
       paragraphs: [
-        'We do not sell your data, and we do not share it with advertisers or data brokers. We share information only with service providers that help us run the Service — such as cloud hosting, payment processing, crash reporting and customer support tools — and only as needed to provide it.',
-        'Every third party we share data with is bound by a written agreement to protect it with the same or equal protection as described in this policy, and to use it only to provide services to us. We may also disclose information when required by law, or as part of a merger or acquisition, with notice to you.'
+        'We do not sell your data, and we do not share it with advertisers or data brokers. We share information only with service providers that help us run the Service, and only as needed to provide it:'
+      ],
+      bullets: [
+        'Cloud hosting and database providers',
+        'Payment and benefit (EBT/WIC) processors',
+        'AI service providers, for invoice reading (Section 06)',
+        'Messaging providers for SMS, email and WhatsApp (Section 05)',
+        'Google Fonts, which delivers the app\'s fonts and receives the device\'s IP address when fonts are downloaded',
+        'Error reporting and customer support tools'
+      ],
+      closing: 'Every third party we share data with is bound by a written agreement to protect it with the same or equal protection as described in this policy, and to use it only to provide services to us. We may also disclose information when required by law, or as part of a merger or acquisition, with notice to you.'
+    },
+    {
+      title: 'Data Stored on Your Device',
+      paragraphs: [
+        'The app keeps a sign-in token in your device\'s encrypted storage (Keychain on iOS, encrypted storage on Android) so staff stay signed in. It is removed when you sign out. The app also stores settings such as printer, display and layout preferences on the device. Uninstalling the app removes this information from the device.'
       ]
     },
     {
       title: 'Tracking & Advertising',
       paragraphs: [
-        'We do not track you across apps or websites owned by other companies, and we do not use your data for third-party advertising. We do not use the device advertising identifier (IDFA).'
+        'We do not track you across apps or websites owned by other companies, and we do not use your data for third-party advertising. We do not use the device advertising identifier (IDFA / Android Advertising ID). The app contains no advertising or analytics SDKs.'
       ]
     },
     {
       title: 'Data Retention & Deletion',
       paragraphs: [
-        'We keep your account and store data for as long as your account is active. Transaction records may be kept for up to seven (7) years where tax or accounting law requires it. Diagnostic logs are kept for up to 90 days.',
-        'You can delete your account at any time from within the app\'s account settings or by emailing us. When an account is deleted, we delete or anonymize the associated personal data within 30 days, except where we must keep certain records by law.'
+        'We keep the Store\'s account and store data for as long as the account is active. Transaction records may be kept for up to seven (7) years where tax or accounting law requires it. Diagnostic logs are kept for up to 90 days.'
+      ],
+      bullets: [
+        `Deleting your account: email us at ${CONTACT_EMAIL} from the email address on the account. We will confirm the request and delete or anonymize the associated personal data within 30 days, except records we must keep by law.`,
+        'Staff and customers: Store administrators can archive staff users and remove customer records in the backoffice at any time.',
+        'Store customers: if you are a customer of a Store, contact that Store to access or delete your information. We will help the Store respond.'
       ]
     },
     {
       title: 'Your Rights & Choices',
       bullets: [
         'Access, correct or export the information we hold about you.',
-        'Withdraw consent at any time — for example, turn off camera access in your device settings.',
-        'Request deletion of your account and personal data.',
+        'Withdraw consent at any time, for example by turning off camera, Bluetooth or photo access in your device settings, or by unsubscribing from messages.',
+        'Request deletion of your account and personal data (Section 11).',
         'Opt out of non-essential emails using the unsubscribe link.',
         'California and other U.S. state residents may exercise the rights provided by applicable state privacy laws. We will not discriminate against you for exercising them.'
       ]
@@ -94,7 +149,7 @@ const PRIVACY: LegalDocument = {
     {
       title: 'Security',
       paragraphs: [
-        'We protect data using TLS encryption in transit, encryption at rest, access controls and regular security reviews. No system is 100% secure, but we work to protect your information and will notify you of a data breach where required by law.'
+        'We protect data using TLS encryption in transit, encryption at rest, hashed staff PINs, role-based access controls and regular security reviews. No system is 100% secure, but we work to protect your information and will notify you of a data breach where required by law.'
       ]
     },
     {
@@ -116,8 +171,10 @@ const TERMS: LegalDocument = {
   eyebrow: 'LICENSE AGREEMENT',
   title: 'Terms of',
   accent: 'Service.',
-  intro:
-    'These Terms of Service (the "Terms") are a legal agreement between you and Produce AI POS Inc. ("Produce AI", "we", "us") for the use of the Produce AI POS apps, register software, web backoffice, hardware program and this website (together, the "Service"). By downloading, installing or using the Service, you agree to these Terms.',
+  effectiveDate: 'October 22, 2026',
+  intro: [
+    'These Terms of Service (the "Terms") are a legal agreement between you and Produce AI POS Inc. ("Produce AI", "we", "us") for the use of the Produce AI POS apps, register software, web backoffice, hardware program and this website (together, the "Service"). By downloading, installing or using the Service, you agree to these Terms.'
+  ],
   sections: [
     {
       title: 'Acknowledgement',
@@ -249,14 +306,16 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
             {doc.title} <span className="text-emerald-600 dark:text-emerald-400">{doc.accent}</span>
           </h1>
           <p className="mt-4 text-[11px] font-mono-telemetry uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-            Effective Date: {EFFECTIVE_DATE}
+            Effective Date: {doc.effectiveDate}
           </p>
         </div>
 
         {/* Document Body */}
         <div className="max-w-3xl mx-auto flex flex-col gap-3.5">
-          <div className="reveal-on-scroll rounded-2xl sm:rounded-3xl bg-white/80 dark:bg-[#121418]/80 border border-neutral-200/80 dark:border-neutral-800/80 backdrop-blur-xl p-5 sm:p-6 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-medium leading-relaxed">
-            {doc.intro}
+          <div className="reveal-on-scroll rounded-2xl sm:rounded-3xl bg-white/80 dark:bg-[#121418]/80 border border-neutral-200/80 dark:border-neutral-800/80 backdrop-blur-xl p-5 sm:p-6 flex flex-col gap-3 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-medium leading-relaxed">
+            {doc.intro.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
           </div>
 
           {doc.sections.map((section, idx) => (
@@ -278,11 +337,24 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
                 ))}
                 {section.bullets && (
                   <ul className="list-disc pl-5 space-y-1.5">
-                    {section.bullets.map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
+                    {section.bullets.map((b) => {
+                      // Bold a leading "Label:" so labelled items scan easily
+                      const match = b.match(/^([A-Z][^:]{0,60}):\s(.*)$/s);
+                      return (
+                        <li key={b}>
+                          {match ? (
+                            <>
+                              <span className="font-semibold text-black dark:text-white">{match[1]}:</span> {match[2]}
+                            </>
+                          ) : (
+                            b
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 )}
+                {section.closing && <p>{section.closing}</p>}
               </div>
             </div>
           ))}
@@ -294,7 +366,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
                 Contact Us
               </span>
               <h2 className="text-sm sm:text-base font-bold text-black dark:text-white tracking-tight">
-                Questions about this {type === 'privacy' ? 'Privacy Policy' : 'agreement'}?
+                {type === 'privacy' ? 'Questions about this Privacy Policy or a deletion request?' : 'Questions about this agreement?'}
               </h2>
             </div>
             <div className="flex flex-col gap-1.5 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-medium leading-relaxed">
