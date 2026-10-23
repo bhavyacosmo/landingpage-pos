@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const CONTACT_EMAIL = 'sharmabhavya400@gmail.com';
+const CONTACT_EMAIL = 'privacy@producepos.app';
 
 interface LegalSection {
   title: string;
