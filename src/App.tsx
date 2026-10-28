@@ -12,6 +12,7 @@ import { GrantCallout } from './components/GrantCallout';
 import { AppleFooter } from './components/AppleFooter';
 import { LeadModal } from './components/LeadModal';
 import { LegalPage } from './components/LegalPage';
+import { ContactPage } from './components/ContactPage';
 
 const LEGAL_ROUTES: Record<string, 'privacy' | 'terms'> = {
   '/privacy-policy': 'privacy',
@@ -19,7 +20,9 @@ const LEGAL_ROUTES: Record<string, 'privacy' | 'terms'> = {
 };
 
 export default function App() {
-  const legalPage = LEGAL_ROUTES[window.location.pathname.replace(/\/+$/, '')];
+  const pathname = window.location.pathname.replace(/\/+$/, '');
+  const legalPage = LEGAL_ROUTES[pathname];
+  const isContactPage = pathname === '/contact';
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -132,6 +135,8 @@ export default function App() {
       <main className="w-full">
         {legalPage ? (
           <LegalPage type={legalPage} />
+        ) : isContactPage ? (
+          <ContactPage />
         ) : (
         <>
         {/* 1. Nike + Apple Monumental Hero with Produce AI Intel */}

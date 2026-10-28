@@ -32,6 +32,9 @@ export const AppleNavbar: React.FC<AppleNavbarProps> = ({ onOpenModal, theme, on
             <a href="/#faq" className="hover:text-black dark:hover:text-white transition-colors">
               FAQs
             </a>
+            <a href="/contact" className="hover:text-black dark:hover:text-white transition-colors">
+              Contact Us
+            </a>
           </nav>
 
           {/* Right Action Area */}
@@ -101,6 +104,13 @@ export const AppleNavbar: React.FC<AppleNavbarProps> = ({ onOpenModal, theme, on
               className="py-1 hover:text-emerald-600 transition-colors"
             >
               FAQs
+            </a>
+            <a
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-1 hover:text-emerald-600 transition-colors"
+            >
+              Contact Us
             </a>
             <div className="pt-2 flex items-center justify-between sm:hidden">
               <span className="text-xs text-neutral-500 font-medium">Appearance</span>

@@ -36,7 +36,7 @@ export const HeroMinimal: React.FC<HeroMinimalProps> = ({ onOpenModal }) => {
           className="w-full h-full object-cover object-center scale-105 opacity-25 dark:opacity-20 filter contrast-110 saturate-125"
         />
         {/* Seamless theme fade overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#fafaf9]/90 via-[#fafaf9]/80 to-[#fafaf9] dark:from-[#090b0e]/92 dark:via-[#090b0e]/82 dark:to-[#090b0e]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fafaf9]/90 via-[#fafaf9]/80 to-[#fafaf9] dark:from-[#090b0e]/[0.92] dark:via-[#090b0e]/[0.82] dark:to-[#090b0e]"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#fafaf9]/85 via-transparent to-[#fafaf9]/85 dark:from-[#090b0e]/85 dark:via-transparent dark:to-[#090b0e]/85"></div>
         {/* Ambient bioluminescent glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[700px] lg:w-[1000px] h-[350px] sm:h-[500px] bg-emerald-500/15 dark:bg-emerald-500/18 blur-[100px] sm:blur-[140px] rounded-full"></div>
