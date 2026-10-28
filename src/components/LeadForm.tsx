@@ -174,7 +174,7 @@ export const LeadForm: React.FC = () => {
   
       {submitted && (
         <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-700 text-xs text-emerald-950 dark:text-emerald-200 font-medium">
-          &check; Request received! A scale technician will call you within 15 minutes to schedule your free setup.
+          Will contact you soon. Form submitted
         </div>
       )}
   
