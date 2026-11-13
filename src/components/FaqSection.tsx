@@ -28,8 +28,8 @@ const FAQS: FaqItem[] = [
     tag: "MOBILE BACKOFFICE"
   },
   {
-    q: "How is the complete hardware package 100% free ($0 due)?",
-    a: "Under the 2026 Fresh Produce Merchant Program, certified equipment packages (including dual-screen terminal, scanner scale, handheld PDA, and electronic shelf tags) are deployed with zero upfront capital expenditure to qualified grocery stores.",
+    q: "Which hardware is included for free?",
+    a: "Under the 2026 Fresh Produce Merchant Program, the dual-screen terminal and scanner scale are included with zero upfront equipment cost for qualified grocery stores. The Handheld Store Scanner and Digital Price Tags are optional paid add-ons and are not included in the free equipment offer. Contact us for pricing.",
     tag: "FREE HARDWARE"
   },
   {

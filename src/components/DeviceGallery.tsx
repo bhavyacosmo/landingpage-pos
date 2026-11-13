@@ -7,7 +7,8 @@ interface DeviceItem {
   tagline: string;
   spec: string;
   image: string;
-  val: string;
+  val?: string;
+  isFree: boolean;
 }
 
 const DEVICES: DeviceItem[] = [
@@ -18,7 +19,8 @@ const DEVICES: DeviceItem[] = [
     tagline: 'Two big screens. One for the cashier to ring, one for the shopper to see prices.',
     spec: 'Water-Resistant &bull; Clear 1080p Screen',
     image: '/images/pos_terminal_hero.jpg',
-    val: '$1,450 Value &bull; 100% Free'
+    val: '$1,450 Value',
+    isFree: true
   },
   {
     id: 'scale',
@@ -27,7 +29,8 @@ const DEVICES: DeviceItem[] = [
     tagline: 'Flat glass scale that scans barcodes and weighs produce in under a second.',
     spec: 'Heavy-Duty Glass &bull; Legal Scale Certified',
     image: '/images/bioptic_scale.jpg',
-    val: '$1,850 Value &bull; 100% Free'
+    val: '$1,850 Value',
+    isFree: true
   },
   {
     id: 'handheld',
@@ -36,7 +39,7 @@ const DEVICES: DeviceItem[] = [
     tagline: 'Walk the aisles to count stock in the cooler and change shelf prices.',
     spec: 'Drops Proof &bull; Long-Life Battery',
     image: '/images/handheld_scanner.jpg',
-    val: '$850 Value &bull; 100% Free'
+    isFree: false
   },
   {
     id: 'esl',
@@ -45,7 +48,7 @@ const DEVICES: DeviceItem[] = [
     tagline: 'Change a price once on your computer. All shelf tags in the store update in 4 seconds.',
     spec: 'Battery Lasts 5 Years &bull; Wire-Free',
     image: '/images/electronic_shelf_labels.jpg',
-    val: '$650 Value &bull; 100% Free'
+    isFree: false
   },
   {
     id: 'pinpad',
@@ -54,7 +57,8 @@ const DEVICES: DeviceItem[] = [
     tagline: 'Fast tap for Apple Pay, credit cards, and food stamps (EBT). Quiet receipt printer.',
     spec: 'Fast Printing &bull; Zero Paper Jams',
     image: '/images/pinpad_printer.jpg',
-    val: '$780 Value &bull; 100% Free'
+    val: '$780 Value',
+    isFree: true
   },
   {
     id: 'bundle',
@@ -63,7 +67,8 @@ const DEVICES: DeviceItem[] = [
     tagline: 'Everything delivered, plugged in, and set up in your store with zero upfront cost.',
     spec: 'Free In-Store Setup by Tech',
     image: '/images/hardware_suite.jpg',
-    val: '$5,000 Setup &bull; 100% Free'
+    val: '$5,000 Setup',
+    isFree: true
   }
 ];
 
@@ -90,7 +95,7 @@ export const DeviceGallery: React.FC<{ onOpenModal: () => void }> = ({ onOpenMod
             </h2>
           </div>
           <p className="text-neutral-600 dark:text-neutral-400 font-medium max-w-md text-sm sm:text-base tracking-tight">
-            Commercial grade. Minimalist form. Engineered specifically for high-volume grocery. All delivered and installed for free.
+            Commercial grade. Engineered for high-volume grocery. Included register equipment is delivered and installed free. Handheld scanners and digital price tags are optional paid add-ons.
           </p>
         </div>
 
@@ -135,9 +140,12 @@ export const DeviceGallery: React.FC<{ onOpenModal: () => void }> = ({ onOpenMod
                   alt={device.title} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
-                <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/85 backdrop-blur-md text-emerald-400 font-mono-telemetry text-[10px] font-bold">
-                  {device.val}
-                </span>
+                {device.val && (
+                  <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/85 backdrop-blur-md text-emerald-400 font-mono-telemetry text-[10px] font-bold">
+                    {device.val}
+                    {device.isFree && <> &bull; 100% Free</>}
+                  </span>
+                )}
               </div>
 
               {/* Text Information */}
@@ -156,14 +164,16 @@ export const DeviceGallery: React.FC<{ onOpenModal: () => void }> = ({ onOpenMod
                 </p>
 
                 <div className="pt-3 border-t border-neutral-200/80 dark:border-neutral-800 flex items-center justify-between mt-auto">
-                  <span className="text-[11px] font-mono-telemetry text-emerald-700 dark:text-emerald-400 font-bold flex items-center gap-1">
-                    <span className="material-symbols-outlined text-sm">check_circle</span> 100% Free Equipment
-                  </span>
+                  {device.isFree && (
+                    <span className="text-[11px] font-mono-telemetry text-emerald-700 dark:text-emerald-400 font-bold flex items-center gap-1">
+                      <span className="material-symbols-outlined text-sm">check_circle</span> 100% Free Equipment
+                    </span>
+                  )}
                   <button 
                     onClick={onOpenModal}
-                    className="text-xs font-bold text-black dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1 cursor-pointer"
+                    className="ml-auto text-xs font-bold text-black dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1 cursor-pointer"
                   >
-                    Get Free &rarr;
+                    {device.isFree ? 'Get Free' : 'Request Pricing'} &rarr;
                   </button>
                 </div>
               </div>

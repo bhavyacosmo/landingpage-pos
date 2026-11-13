@@ -36,7 +36,7 @@ npm run preview
 2. **Real Hardware & Device Suite**:
    - **15.6" Dual IPS Produce POS Terminal**: Touchscreen with customer price-facing unit.
    - **In-Counter Bi-Optic Produce Scale**: Flush stainless steel platter with sapphire 360° laser array.
-   - **Wireless Inventory & Receiving Terminal (TC52 Handheld)**: Wholesale delivery OCR and cooler stock audit.
+   - **Android Inventory & Receiving Handheld**: Wholesale delivery OCR and cooler stock audit.
    - **Electronic Shelf Labels (ESL Tags)**: E-paper displays syncing prices across aisles in < 5 seconds.
    - **Thermal Receipt Printer & Smart Contactless PIN Pad**: Apple Pay, EMV chip, and SNAP/EBT split.
    - **Turnkey Produce Lane Workstation Bundle**: Complete hardware suite provided at $0 upfront.
@@ -58,6 +58,8 @@ npm run preview
 ---
 
 ## 📁 Project Structure
+
+The active handheld image in `public/images/handheld_scanner.jpg` uses a representative Datalogic Skorpio X5 trigger-grip product image from [BarcodesInc](https://www.barcodesinc.com/datalogic/part-943500036.htm). The project owner confirmed authorization for commercial reuse and branding removal. The image was cropped to one device, retouched to remove its logo, and resized for the existing card; it does not specify the model supplied with a purchase.
 
 ```
 ├── public/

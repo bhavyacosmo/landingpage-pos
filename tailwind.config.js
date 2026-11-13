@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class",
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,35 +7,50 @@ export default {
   theme: {
     extend: {
       colors: {
-        "pine-deep": "#032517",
-        "pine-dark": "#073220",
-        "pine-surface": "#0f3d28",
-        "emerald-accent": "#059669",
-        "emerald-bright": "#10b981",
-        "emerald-glow": "#00f59b",
-        "emerald-soft": "#ecfdf5",
-        "emerald-tint": "#f0fdf4",
-        "amber-accent": "#d97706",
-        "amber-soft": "#fef3c7",
-        "surface-warm": "#fbfbf8",
-        "surface-card": "#ffffff",
-        "border-hairline": "#e2e8f0",
-        "border-warm": "#e5e2d9",
-        "text-main": "#0b1210",
-        "text-muted": "#475569",
-        "text-subtle": "#64748b"
+        // Produce POS Fresh Green Brand Palette
+        "produce-green": "#10b981",
+        "produce-green-dark": "#059669",
+        "produce-green-hover": "#047857",
+        "produce-green-light": "#ecfdf5",
+        "produce-green-pill": "#d1fae5",
+        "produce-green-pill-hover": "#a7f3d0",
+        "produce-pine": "#064e3b",
+        "produce-lime": "#9be05e",
+        "produce-black": "#0f0f0f",
+        "produce-video-black": "#0d0d0d",
+        "produce-charcoal": "#0e0d14",
+        "produce-offwhite": "#f4f3f1",
+        "produce-gray-bold": "#a3a3a3",
+
+        // Backward compatibility mappings
+        "vori-purple": "#10b981",
+        "vori-purple-hover": "#059669",
+        "vori-purple-light": "#ecfdf5",
+        "vori-purple-pill": "#d1fae5",
+        "vori-purple-pill-hover": "#a7f3d0",
+        "vori-lilac": "#ecfdf5",
+        "vori-lime": "#9be05e",
+        "vori-black": "#0f0f0f",
+        "vori-video-black": "#0d0d0d",
+        "vori-charcoal": "#0e0d14",
+        "vori-offwhite": "#f4f3f1",
+        "vori-gray-bold": "#a3a3a3",
       },
       fontFamily: {
-        "editorial": ["Playfair Display", "Georgia", "serif"],
-        "sans": ["Plus Jakarta Sans", "system-ui", "-apple-system", "sans-serif"],
-        "mono-telemetry": ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"]
+        sans: ['"Rethink Sans"', "Arial", "system-ui", "-apple-system", "sans-serif"],
+        serif: ['"STIX Two Text"', "Georgia", "serif"],
+        mono: ['"Fragment Mono"', "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+        editorial: ['"STIX Two Text"', "Georgia", "serif"],
+        "mono-telemetry": ['"Fragment Mono"', "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+      },
+      maxWidth: {
+        vori: "80rem",
       },
       boxShadow: {
-        "subtle": "0 2px 10px rgba(3, 37, 23, 0.04)",
-        "elevated": "0 20px 45px -15px rgba(3, 37, 23, 0.08), 0 0 0 1px rgba(226, 232, 240, 0.8)",
-        "glow": "0 0 35px -5px rgba(16, 185, 129, 0.25)",
-        "device": "0 30px 70px -15px rgba(2, 44, 34, 0.2), 0 10px 25px -5px rgba(15, 23, 42, 0.08)"
-      }
+        "vori-card": "0 1px 2px rgba(13, 13, 13, 0.04), 0 8px 24px rgba(13, 13, 13, 0.06)",
+        "vori-dropdown": "0 20px 50px -12px rgba(14, 13, 20, 0.16), 0 0 0 1px rgba(13, 13, 13, 0.06)",
+        "vori-tab": "0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05)",
+      },
     },
   },
   plugins: [],
