@@ -2,18 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ink: #07080a;
+  --panel: #0e100e;
+  --line: rgba(255, 255, 255, 0.1);
+  --neon: #31e327;
+  --neon-deep: #1fb818;
+  --paper: #f1f0ea;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @layer base {
   html,
   body {
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
-    color: #0f0f0f;
+    background-color: var(--ink);
+    color: #fff;
     font-family: "Rethink Sans", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
   body {
     overflow-x: hidden;
   }
@@ -27,61 +36,155 @@
   scrollbar-width: none;
 }
 
-/* Produce POS fresh green gradient pill text in AI employee card */
-.produce-green-gradient-text,
-.vori-lilac-gradient-text {
-  background: linear-gradient(90deg, #ffffff 0%, #a7f3d0 52%, #34d399 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Tab auto-progress bar animation */
-@keyframes voriTabProgress {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-.animate-tab-progress {
-  transform-origin: left center;
-  animation: voriTabProgress 7s linear forwards;
-}
-
-/* Subtle reveal animations matching Vori GSAP scroll feel */
-.vori-reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.vori-reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Quiet interaction layer */
 :focus-visible {
-  outline: 2px solid #10b981;
+  outline: 2px solid var(--neon);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 8px;
 }
-
 ::placeholder {
   color: #9ca3af;
 }
 
-/* Underline that draws on hover */
+/* ---------- Type helpers ---------- */
+.serif-accent {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.eyebrow {
+  font-family: "Fragment Mono", ui-monospace, monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.h-display {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  text-wrap: balance;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+/* one fluid scale for every section heading */
+.h-section {
+  font-size: clamp(2.375rem, 1.45rem + 3.4vw, 3.875rem);
+  letter-spacing: -0.038em;
+}
+p, li, dd { text-wrap: pretty; }
+
+/* ---------- Grounds ---------- */
+.ground-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.11) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 70% 45%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 70% at 70% 45%, #000 20%, transparent 75%);
+}
+.ground-grid-light {
+  background-image: radial-gradient(rgba(7, 8, 10, 0.1) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.glow-neon {
+  background: radial-gradient(closest-side, rgba(49, 227, 39, 0.5), rgba(49, 227, 39, 0) 72%);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+  transition: transform 0.25s var(--ease), background-color 0.25s, color 0.25s, box-shadow 0.35s;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-neon {
+  background: var(--neon);
+  color: var(--ink);
+  box-shadow: 0 0 0 0 rgba(49, 227, 39, 0);
+  overflow: hidden;
+}
+.btn-neon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s var(--ease);
+}
+.btn-neon:hover {
+  box-shadow: 0 10px 40px -8px rgba(49, 227, 39, 0.65);
+  transform: translateY(-2px);
+}
+.btn-neon:hover::after {
+  transform: translateX(120%);
+}
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+/* App download links in the footer column: same look as every footer link; the mark presses with the link */
+.store-link svg {
+  transition: transform 0.16s var(--ease);
+}
+.store-link:active svg {
+  transform: scale(0.92);
+}
+.store-link:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+/* App links in the Specs section: arrow nudges toward the store, press confirms */
+.app-link-arrow {
+  transition: transform 0.2s var(--ease), color 0.2s var(--ease);
+}
+.app-link:active {
+  transform: scale(0.97);
+}
+@media (hover: hover) and (pointer: fine) {
+  .app-link:hover .app-link-arrow {
+    transform: translate(2px, -2px);
+  }
+}
+.app-link:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.btn-ink {
+  background: var(--ink);
+  color: #fff;
+}
+.btn-ink:hover {
+  background: #1a1d1a;
+  transform: translateY(-2px);
+}
+.btn .arrow {
+  transition: transform 0.3s var(--ease);
+}
+.btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Underline that draws */
 .link-draw {
   background-image: linear-gradient(currentColor, currentColor);
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 100% 1px;
-  transition: background-size 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-size 0.3s var(--ease);
   padding-bottom: 3px;
 }
 .link-draw:hover {
@@ -89,29 +192,298 @@
   background-position: 100% 100%;
 }
 
-/* One authored moment: hero content settles in on load */
-@keyframes settle {
+/* ---------- Cards ---------- */
+.card-lift {
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s;
+}
+.card-lift:hover {
+  transform: translateY(-2px);
+}
+.zoom-frame {
+  overflow: hidden;
+}
+.zoom-frame img {
+  transition: transform 0.7s var(--ease);
+}
+.zoom-frame:hover img,
+.group:hover .zoom-frame img {
+  transform: scale(1.03);
+}
+
+/* Cursor-follow light on dark cards */
+.spot {
+  position: relative;
+  isolation: isolate;
+}
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(49, 227, 39, 0.16),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+  z-index: -1;
+}
+.spot:hover::before {
+  opacity: 1;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
     transform: none;
   }
 }
-.settle {
-  animation: settle 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+.row-in {
+  animation: rise-in 0.5s var(--ease) both;
 }
-.settle-2 {
-  animation-delay: 0.12s;
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
 }
-.settle-3 {
-  animation-delay: 0.24s;
+.pulse-dot {
+  position: relative;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: currentColor;
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+@keyframes scan {
+  0% {
+    top: 4%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 96%;
+    opacity: 0;
+  }
+}
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--neon);
+  box-shadow: 0 0 18px 4px rgba(49, 227, 39, 0.55);
+  animation: scan 3.2s ease-in-out infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+.flow-line {
+  stroke-dasharray: 6 10;
+  animation: dash 1.2s linear infinite;
+}
+
+@keyframes bar-grow {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.bar-loop {
+  transform-origin: bottom;
+  animation: bar-grow 3.6s var(--ease) infinite;
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+.caret {
+  animation: caret 1s steps(1) infinite;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.float-y {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+/* Hero load choreography (set by GSAP; hidden state only when JS runs) */
+.js-hero [data-hero] {
+  opacity: 0;
+}
+
+/* Hardware / screen slots: image dropped in via src/media.ts */
+.slot-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .settle {
-    animation: none;
+  .marquee-track,
+  .flow-line,
+  .bar-loop,
+  .scan-line,
+  .pulse-dot::after,
+  .float-y,
+  .caret,
+  .row-in {
+    animation: none !important;
   }
+  .js-hero [data-hero] {
+    opacity: 1;
+  }
+  .btn,
+  .card-lift,
+  .zoom-frame img {
+    transition: none;
+  }
+}
+
+
+/* browser surfaces themed from the palette */
+html { scrollbar-color: #2b2f2b #07080a; }
+input, textarea, select { caret-color: #31e327; accent-color: #31e327; }
+
+
+/* ---------- Richer grounds ---------- */
+/* paper: warm sand + a breath of green, with fine grain so it is never flat */
+.paper-ground {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(60% 46% at 90% 0%, rgba(49, 227, 39, 0.12), transparent 70%),
+    radial-gradient(56% 42% at 0% 100%, rgba(190, 160, 100, 0.22), transparent 72%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .075 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* soft hand-off between dark and paper sections instead of a hard edge */
+.seam-in,
+.seam-out { position: relative; }
+.seam-in::before,
+.seam-out::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: clamp(56px, 9vh, 104px);
+  pointer-events: none;
+  z-index: 2;
+}
+.seam-in::before { top: 0; background: linear-gradient(to bottom, rgba(7, 8, 10, 0.92), rgba(7, 8, 10, 0.5) 28%, rgba(7, 8, 10, 0.16) 62%, rgba(7, 8, 10, 0)); }
+.seam-out::after { bottom: 0; background: linear-gradient(to top, rgba(7, 8, 10, 0.92), rgba(7, 8, 10, 0.5) 28%, rgba(7, 8, 10, 0.16) 62%, rgba(7, 8, 10, 0)); }
+
+/* slow drift so the glow behind the hero and footer feels lit, not pasted */
+@keyframes glow-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-3%, 4%, 0) scale(1.08); }
+}
+.glow-drift { animation: glow-drift 16s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-drift { animation: none !important; }
+}
+
+/* ---------- Motion graphics ---------- */
+
+/* footer barcode being read */
+.scanbars { height: 120px; width: 280px; mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); }
+.scanbars-beam {
+  position: absolute;
+  top: -14%;
+  bottom: -14%;
+  left: 0;
+  width: 2px;
+  background: #d9ffd6;
+  box-shadow: 0 0 10px 2px rgba(49, 227, 39, 0.9), 0 0 36px 10px rgba(49, 227, 39, 0.35);
+  animation: scanbars-beam 3.4s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+}
+.scanbars-lit {
+  clip-path: inset(0 100% 0 0);
+  animation: scanbars-lit 3.4s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+  filter: drop-shadow(0 0 6px rgba(49, 227, 39, 0.7));
+}
+@keyframes scanbars-beam { from { left: 0%; } to { left: 100%; } }
+@keyframes scanbars-lit {
+  from { clip-path: inset(0 100% 0 -10%); }
+  to { clip-path: inset(0 -10% 0 90%); }
+}
+
+/* glint across the screen frame when a chapter changes */
+.glint {
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: -40%;
+  width: 34%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+  mix-blend-mode: screen;
+  transform: skewX(-14deg);
+  animation: glint-pass 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.18s 1 both;
+  pointer-events: none;
+}
+@keyframes glint-pass {
+  from { transform: translateX(0) skewX(-14deg); opacity: 1; }
+  to { transform: translateX(480%) skewX(-14deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scanbars-beam,
+  .scanbars-lit,
+  .glint { animation: none !important; }
+  .scanbars-beam,
+  .scanbars-lit,
+  .glint { opacity: 0; }
 }

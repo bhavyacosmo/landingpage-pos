@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
-import { VoriNavbar } from "./components/vori/VoriNavbar";
-import { VoriHero } from "./components/vori/VoriHero";
-import { OutcomeTabsSection } from "./components/vori/OutcomeTabsSection";
-import { HardwareUpgradeSection } from "./components/vori/HardwareUpgradeSection";
-import { VoriFaqSection } from "./components/vori/VoriFaqSection";
-import { VoriFooter } from "./components/vori/VoriFooter";
+import { Navbar } from "./components/site/Navbar";
+import { Hero, Marquee } from "./components/site/Hero";
+import { Story } from "./components/site/Story";
+import { Features } from "./components/site/Features";
+import { Hardware } from "./components/site/Hardware";
+import { Specs, Faq } from "./components/site/SpecsFaq";
+import { Footer } from "./components/site/Footer";
 import { BookDemoModal } from "./components/vori/BookDemoModal";
 import { LegalPage } from "./components/vori/LegalPage";
 import { ContactPage } from "./components/vori/ContactPage";
+import { PartnershipsPage } from "./components/vori/PartnershipsPage";
 import { PRIVACY, TERMS } from "./components/vori/legalContent";
+import { useReveal } from "./components/site/hooks";
+import { ScrollTop } from "./components/site/ScrollTop";
 
 export default function App() {
   const path = window.location.pathname.replace(/\/+$/, "") || "/";
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [demoContext, setDemoContext] = useState<string | undefined>(undefined);
+  useReveal(path === "/");
 
   const openBookDemo = (context?: string) => {
     setDemoContext(context);
@@ -25,6 +30,7 @@ export default function App() {
       "/privacy-policy": "Privacy Policy | Produce AI POS",
       "/terms-of-service": "Terms of Service | Produce AI POS",
       "/contact": "Contact Us | Produce AI POS",
+      "/partnerships": "Partnerships | Produce AI POS",
     };
     if (titles[path]) document.title = titles[path];
     window.scrollTo(0, 0);
@@ -41,9 +47,8 @@ export default function App() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-white text-[#0f0f0f] font-sans antialiased selection:bg-[#d1fae5] selection:text-[#065f46]">
-      {/* Sticky Minimalist Header */}
-      <VoriNavbar onBookDemo={openBookDemo} />
+    <div className={`w-full min-h-screen bg-ink text-white font-sans antialiased selection:bg-neon selection:text-ink`}>
+      <Navbar onBookDemo={openBookDemo} />
 
       <main className="w-full">
         {path === "/privacy-policy" ? (
@@ -52,27 +57,25 @@ export default function App() {
           <LegalPage doc={TERMS} />
         ) : path === "/contact" ? (
           <ContactPage />
+        ) : path === "/partnerships" ? (
+          <PartnershipsPage />
         ) : (
           <>
-            {/* 1. Dark Editorial Hero */}
-            <VoriHero onBookDemo={openBookDemo} />
-
-            {/* 2. Complete 3-Pillar System Architecture (Generous White Space) */}
-            <OutcomeTabsSection onBookDemo={openBookDemo} />
-
-            {/* 3. Free Basic Hardware Setup + Optional Hardware Add-Ons + Spec Sheet */}
-            <HardwareUpgradeSection onBookDemo={openBookDemo} />
-
-            {/* 4. Frequently Asked Questions */}
-            <VoriFaqSection onBookDemo={openBookDemo} />
+            <Hero onBookDemo={openBookDemo} />
+            <Marquee />
+            <Story />
+            <Features />
+            <Hardware onBookDemo={openBookDemo} />
+            <Specs />
+            <Faq onBookDemo={openBookDemo} />
           </>
         )}
       </main>
 
-      {/* 5. Free Hardware Program Callout & Footer */}
-      <VoriFooter onBookDemo={openBookDemo} />
+      <Footer onBookDemo={openBookDemo} compact={path === "/privacy-policy" || path === "/terms-of-service" || path === "/contact" || path === "/partnerships"} />
 
-      {/* Lead Capture Modal */}
+      <ScrollTop />
+
       <BookDemoModal
         isOpen={demoModalOpen}
         context={demoContext}

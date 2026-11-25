@@ -1,6 +1,5 @@
 import React from "react";
 import { X } from "lucide-react";
-import { VoriLogo } from "./VoriLogo";
 import { LeadForm } from "./LeadForm";
 
 interface BookDemoModalProps {
@@ -33,9 +32,6 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
         >
           <X className="w-4 h-4" />
         </button>
-        <div className="mb-6">
-          <VoriLogo theme="light" size="nav" />
-        </div>
         <LeadForm key={String(isOpen)} context={context} onDone={onClose} />
       </div>
     </div>

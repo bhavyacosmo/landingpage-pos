@@ -1,292 +1,334 @@
 export type Block = string | string[];
 export interface LegalSection {
+  /** A plain statement, so the heading alone tells you the answer. */
   title: string;
+  /** Short label used in the page index. */
+  nav: string;
   body: Block[];
 }
 export interface LegalDoc {
+  slug: "privacy-policy" | "terms-of-service";
   title: string;
   updated: string;
-  intro: string[];
+  /** Three lines a reader can take away without scrolling. */
+  summary: string[];
+  intro: string;
   sections: LegalSection[];
   contactHeading: string;
 }
 
 export const PRIVACY: LegalDoc = {
+  slug: "privacy-policy",
   title: "Privacy Policy",
   updated: "November 4, 2026",
-  contactHeading: "Questions about this policy, or want your data deleted?",
-  intro: [
-    "This page explains what information Produce AI POS Inc. (“we”, “us”) collects when you use our register software, mobile apps, web back office and this website, what we do with it, and the choices you have.",
-    "Our customers are stores. A store decides what information about its own staff and shoppers goes into the system. For that information, the store is in charge and we only handle it on the store’s behalf. If you are a shopper at a store that uses us, please ask that store about your information.",
+  contactHeading: "Questions, or want your data deleted?",
+  summary: [
+    "We never sell your data.",
+    "No ads. No trackers.",
+    "Delete your account in the app, any time.",
   ],
+  intro:
+    "This covers what Produce AI POS Inc. collects when you use our register software, apps, web back office and this website.",
   sections: [
     {
-      title: "What we collect",
+      nav: "What we collect",
+      title: "We collect only what a store needs to run checkout",
       body: [
-        "Only what’s needed to run a store’s checkout and back office:",
         [
-          "Account details: business and store name, address, your name, email and phone number, and anything you give us when you sign up or request hardware.",
-          "Sign-in details: your email, and the one-time codes we send to it to confirm a new device. Staff can get their own login email from the store’s admin.",
-          "Staff details: names, roles, what each person is allowed to do, sign-in PINs (saved only in scrambled form, never as plain text), clock-in and clock-out times, and a log of actions taken in the system.",
-          "Shopper details the store enters: name, phone, email, address, tax ID, tax-exemption papers, loyalty points, purchase history, store credit or balances, and marketing preferences.",
-          "Sales and stock: items sold, prices, weights, discounts, payment types, refunds, held orders, shifts, products, stock levels, costs, spoilage records and vendors.",
-          "Files you choose to add: photos and files of vendor invoices, tax-exemption papers, product images, and pictures or videos for customer screens. We only get files you pick.",
-          "Device information: device model, system version, app version, printer, scale and scanner connection events, and error reports.",
-          "Website forms: whatever you type into forms on this site, such as the free hardware request.",
+          "Account: store name, address, your name, email and phone.",
+          "Sign-in: your email, and one-time codes sent to it.",
+          "Staff: names, roles, permissions, clock-ins and an action log. PINs are stored scrambled, never as plain text.",
+          "Shoppers, as entered by the store: contact details, tax ID, loyalty points, purchase history, store credit and marketing choices.",
+          "Sales and stock: items, prices, weights, payments, refunds, shifts, costs, spoilage and vendors.",
+          "Files you add: invoices, tax-exemption papers, product images and screen media.",
+          "Devices: model, versions, equipment connection events and error reports.",
+          "Website forms: whatever you type, such as a free hardware request.",
+          "Payment companies: whether a payment went through, and the last four card digits.",
         ],
       ],
     },
     {
-      title: "What the app asks to use on your device",
+      nav: "Who is in charge",
+      title: "The store controls its shoppers’ data. We handle it for them",
       body: [
-        "The app asks only when a feature needs it, and you can switch any of these off in your device settings. The related feature simply stops working until you turn it back on.",
+        "A store decides what staff and shopper information goes into the system. If you shop at one of our stores, ask that store about your information. We will help them respond.",
+      ],
+    },
+    {
+      nav: "App permissions",
+      title: "The app asks for access only when a feature needs it",
+      body: [
+        "You can turn any of these off in device settings. Only the related feature stops.",
         [
-          "Camera: to scan barcodes and photograph vendor invoices, only while you have the scanner open.",
-          "Photos and files: to attach invoices, tax papers and ad media that you choose.",
-          "Bluetooth and local network: to find label printers and connect to equipment in your store.",
-          "Location (older Android phones only): Android requires this to search for nearby Bluetooth printers. We don’t collect, save or share your location.",
-          "Built-in barcode scanners: on handheld devices, the app reads scans only while it’s open.",
+          "Camera: to scan barcodes and photograph invoices, only while the scanner is open.",
+          "Photos and files: to attach invoices, tax papers and media you pick.",
+          "Bluetooth and local network: to find printers and store equipment.",
+          "Location, older Android only: Android requires it to find Bluetooth printers. We never collect, save or share it.",
+          "Built-in barcode scanners: read only while the app is open.",
         ],
       ],
     },
     {
-      title: "How we get your information",
+      nav: "How we use it",
+      title: "We use it to run your store, and for nothing else",
       body: [
         [
-          "Straight from you, when you create an account, verify your email, add staff or shoppers, upload files, fill in a form or contact support.",
-          "Automatically from the register, scale, scanner, printer and app while you use them.",
-          "From payment companies, limited to whether a payment went through and the last four digits of the card, so your books match.",
+          "Run checkout, scales, printers, offline mode and the back office.",
+          "Verify email, link devices and apply staff permissions.",
+          "Build sales, shift, profit and stock reports.",
+          "Read invoices and update your costs and prices.",
+          "Run your promotions and loyalty program.",
+          "Provide support, installation and hardware service.",
+          "Prevent fraud and fix technical problems.",
+          "Meet legal, tax, weights-and-measures and card-network rules.",
         ],
       ],
     },
     {
-      title: "What we use it for",
+      nav: "Marketing messages",
+      title: "Shopper messages go out only when a store sends them",
       body: [
         [
-          "Running the checkout, scale and printer connections, offline mode and back office.",
-          "Setting up your store, verifying your email and linking your devices.",
-          "Signing staff in and applying their permissions, clock-ins and activity records.",
-          "Building sales reports, end-of-shift reports, profit views and stock updates.",
-          "Reading the vendor invoices you upload and updating your costs and prices.",
-          "Running your store’s promotions and loyalty program, and sending the messages your store sets up.",
-          "Support, installation, scale calibration and hardware service.",
-          "Preventing fraud and fixing security and technical problems.",
-          "Meeting legal, tax, weights-and-measures and card-network rules.",
+          "Stores can text, email or WhatsApp shoppers about offers and rewards.",
+          "Only shoppers who agreed receive them. The store must get that permission.",
+          "Shoppers can reply STOP, use the unsubscribe link, or ask the store to remove them.",
+          "We never use shopper data to market our own products.",
         ],
       ],
     },
     {
-      title: "Shoppers and marketing messages",
+      nav: "AI and invoices",
+      title: "AI reads an invoice only when you scan one",
       body: [
-        "Stores can use the system to text, email or WhatsApp their shoppers about offers and loyalty rewards.",
-        [
-          "Messages go out only when the store tells us to, and only to shoppers who agreed to get them. The store is responsible for getting that permission.",
-          "Shoppers can stop texts by replying STOP, and stop emails with the unsubscribe link. They can also ask the store to remove them.",
-          "We never use a store’s shopper information to market our own products, and we never sell it.",
-        ],
+        "AI picks out the vendor, invoice number, items and prices so you can check them. The file is used for nothing else, and nothing is saved until you confirm.",
       ],
     },
     {
-      title: "AI reading of invoices",
+      nav: "Card payments",
+      title: "We never store full card numbers",
       body: [
-        "When you scan or upload a vendor invoice, AI reads it to pick out the vendor, invoice number, items and prices so you can check them. The file is used only for that. Nothing is saved to your records until you confirm it.",
+        "No card numbers, security codes or stripe data touch our registers or servers. Cards go through PCI-DSS Level 1 certified terminals and processors. EBT SNAP and WIC go through approved benefit processors.",
       ],
     },
     {
-      title: "Card payments",
+      nav: "Who we share with",
+      title: "We share data only with the companies that help us run the service",
       body: [
-        "We don’t store full card numbers, security codes or magnetic-stripe data on registers, devices or our servers. Card payments go through PCI-DSS Level 1 certified payment terminals and processors. EBT SNAP and WIC payments go through approved benefit processors.",
-      ],
-    },
-    {
-      title: "Who we share it with",
-      body: [
-        "We don’t sell your data, and we don’t share it with advertisers or data brokers. We share it only with companies that help us run the service, and only as much as they need:",
+        "We don’t sell data, and we don’t share it with advertisers or data brokers. Each company below is bound in writing to protect it and use it only for us.",
         [
           "Cloud hosting and database providers",
-          "Payment and benefit (EBT/WIC) processors",
+          "Payment and EBT/WIC processors",
           "AI providers, for reading invoices",
           "Email providers, for sign-in codes",
           "Text, email and WhatsApp providers, for store messages",
-          "Google Fonts, which supplies our fonts and sees your device’s IP address when they download",
+          "Google Fonts, which sees your IP address when fonts load",
           "Error-reporting and support tools",
         ],
-        "Each of these companies has agreed in writing to protect your data as well as we do and to use it only to serve us. We may also share information if the law requires it, or if our company is bought or merges (we’ll tell you first).",
+        "We may also share data if the law requires it, or if the company is sold. We will tell you first.",
       ],
     },
     {
-      title: "What stays on your device",
+      nav: "On your device",
+      title: "The app keeps two tokens on your device, and clears them when you sign out",
       body: [
-        "The app keeps two things in your device’s protected storage:",
         [
-          "A sign-in token, so staff stay signed in. It’s removed when you sign out and expires on its own.",
-          "A device token and your store’s ID, saved after you verify your email once, so staff can sign in on that device with a PIN. It’s removed when you choose “Sign in with a different email” or delete your account in the app. On iPhones, this item can remain after the app is uninstalled until it’s removed that way.",
-        ],
-        "The app also remembers settings like printer and layout choices. Uninstalling the app clears those.",
-      ],
-    },
-    {
-      title: "Tracking and ads",
-      body: [
-        "We don’t follow you across other companies’ apps or websites and we don’t use your data for third-party ads. We don’t use your device’s advertising ID, and the app has no ad or analytics software built in.",
-      ],
-    },
-    {
-      title: "How long we keep data, and deleting your account",
-      body: [
-        "We keep a store’s account and data while the account is active. Sales records may be kept up to seven years where tax or accounting law requires it. Error logs are kept up to 90 days.",
-        "To delete your account:",
-        [
-          "In the app: open Settings, choose Delete account, and confirm.",
-          "By email: write to support@produceai.co from the email address on the account.",
-        ],
-        "We’ll confirm your request and delete or anonymize the account and its personal data within 30 days, except records the law makes us keep, such as tax-related sales records. Deleting a store owner’s account closes the store and removes its staff, shopper and store data the same way.",
-        [
-          "Store admins can archive staff, remove a staff member’s login email, and remove shopper records in the back office at any time.",
-          "Shoppers should contact the store they shop at to see or delete their information. We’ll help the store respond.",
+          "A sign-in token keeps staff signed in. It is removed on sign-out and expires on its own.",
+          "A device token and store ID let staff sign in with a PIN. They are removed when you choose “Sign in with a different email” or delete your account. On iPhones this can remain after uninstalling until removed that way.",
+          "Printer and layout settings are cleared when you uninstall.",
         ],
       ],
     },
     {
-      title: "Your choices",
+      nav: "Ads and tracking",
+      title: "No ads, no tracking",
+      body: [
+        "We don’t follow you across other apps or sites, and we don’t use your data for third-party ads. We don’t use your advertising ID. The app has no ad or analytics software.",
+      ],
+    },
+    {
+      nav: "Keeping data",
+      title: "We keep data while your account is active",
       body: [
         [
-          "See, correct or get a copy of the information we hold about you.",
-          "Take back your permission any time, by turning off camera, Bluetooth or photo access, or by unsubscribing from messages.",
+          "Sales records: up to seven years where tax or accounting law requires.",
+          "Error logs: up to 90 days.",
+        ],
+      ],
+    },
+    {
+      nav: "Delete your account",
+      title: "Delete your account in the app, or by email",
+      body: [
+        [
+          "In the app: Settings, then Delete account, then confirm.",
+          "By email: write to support@producepos.app from the account’s email address.",
+        ],
+        "We delete or anonymize the account and its personal data within 30 days. We keep only records the law requires, such as tax-related sales. Deleting a store owner’s account closes the store and removes its staff, shopper and store data. Admins can also archive staff and remove shopper records in the back office at any time.",
+      ],
+    },
+    {
+      nav: "Your choices",
+      title: "You can see, correct, export or delete your data",
+      body: [
+        [
+          "Ask for a copy of what we hold.",
+          "Withdraw permission by turning off camera, Bluetooth or photo access, or by unsubscribing.",
           "Ask us to delete your account and personal data.",
-          "Opt out of non-essential emails with the unsubscribe link.",
-          "If you live in California or another U.S. state with privacy laws, you can use the rights those laws give you. We won’t treat you differently for doing so.",
+          "Opt out of non-essential email with the unsubscribe link.",
+          "In California or another U.S. state with privacy laws, use the rights those laws give you. We won’t treat you differently.",
         ],
       ],
     },
     {
-      title: "Security",
+      nav: "Security",
+      title: "Your data is encrypted in transit and at rest",
       body: [
-        "We protect data with encryption while it travels and while it’s stored, scrambled staff PINs, one-time email codes for new devices, access limited by role, and regular security reviews. No system is perfectly safe, but we work hard on it, and we’ll tell you about a data breach where the law requires.",
+        "We also scramble staff PINs, send one-time codes for new devices, limit access by role and run regular security reviews. No system is perfectly safe. Where the law requires, we will tell you about a breach.",
       ],
     },
     {
-      title: "Children",
+      nav: "Children",
+      title: "This service is for businesses, not for children under 13",
       body: [
-        "This service is built for businesses, not for children under 13, and we don’t knowingly collect their information. If you think a child has given us information, tell us and we’ll delete it.",
+        "We don’t knowingly collect children’s information. If you think a child has given us any, tell us and we will delete it.",
       ],
     },
     {
-      title: "Changes to this policy",
+      nav: "Changes",
+      title: "We post changes here, with a new date",
       body: [
-        "If we update this policy, we’ll post the new version here with a new date, and tell you in the app or by email about any important changes.",
+        "For important changes we also tell you in the app or by email.",
       ],
     },
   ],
 };
 
 export const TERMS: LegalDoc = {
+  slug: "terms-of-service",
   title: "Terms of Service",
   updated: "October 22, 2026",
   contactHeading: "Questions about these terms?",
-  intro: [
-    "These terms are an agreement between you and Produce AI POS Inc. (“we”, “us”) about using our register software, apps, web back office, hardware program and this website. By downloading, installing or using any of it, you agree to these terms.",
+  summary: [
+    "Your store data stays yours.",
+    "Free hardware goes to qualified stores, first come first served.",
+    "Stop using it and delete your account any time.",
   ],
+  intro:
+    "These terms are an agreement between you and Produce AI POS Inc. They cover our register software, apps, web back office, hardware program and this website. By downloading, installing or using any of it, you agree.",
   sections: [
     {
-      title: "Who this agreement is with",
+      nav: "Who this is with",
+      title: "This agreement is with us, not with Apple or Google",
       body: [
-        "This agreement is only between you and Produce AI. It is not with Apple or Google. We, not Apple or Google, are responsible for the service and what’s in it.",
+        "We, not Apple or Google, are responsible for the service and what is in it.",
       ],
     },
     {
-      title: "What you’re allowed to do",
+      nav: "What you can do",
+      title: "You may use the service for your store’s business",
       body: [
-        "We give you a limited, non-exclusive, non-transferable license, which we can withdraw, to use the service for your store’s business. If you get our app from the Apple App Store, you can use it on Apple devices you own or control, as Apple’s rules allow.",
+        "We give you a limited, non-exclusive, non-transferable license, which we can withdraw. If you get the app from the Apple App Store, you can use it on Apple devices you own or control.",
         [
           "Don’t copy, change, take apart or resell the service, its scale drivers or its software.",
           "Don’t use it for anything illegal or against card-network rules.",
-          "Keep your login details safe. You’re responsible for everything done under your account.",
+          "Keep your login safe. You are responsible for everything done under your account.",
         ],
       ],
     },
     {
-      title: "Your account and your data",
+      nav: "Your account",
+      title: "Your store data stays yours",
       body: [
-        "Give us accurate information when you sign up. Your store data stays yours. You let us handle it only to provide the service, as our Privacy Policy explains. You can delete your account any time in the app.",
+        "Give us accurate information when you sign up. You let us handle your data only to provide the service, as our Privacy Policy explains. You can delete your account in the app any time.",
       ],
     },
     {
-      title: "Free hardware program",
+      nav: "Free hardware",
+      title: "Free hardware goes to qualified stores, first come first served",
       body: [
-        "Free hardware goes to qualified stores, first come, first served, and may come with a separate hardware agreement. Scale installation and calibration must follow your state and local weights-and-measures rules.",
+        "It may come with a separate hardware agreement. Scale installation and calibration must follow your state and local weights-and-measures rules.",
       ],
     },
     {
-      title: "Payments, EBT and WIC",
+      nav: "Payments",
+      title: "You keep your payment, EBT and WIC approvals in good standing",
       body: [
-        "You’re responsible for keeping your payment-processing account, your USDA EBT SNAP authorization and your state WIC approvals in good standing and following their rules. Subscription fees, if there are any, are billed as agreed when you sign up and aren’t refundable unless the law says otherwise.",
+        "That means your payment-processing account, your USDA EBT SNAP authorization and your state WIC approvals, and following their rules. Subscription fees, if any, are billed as agreed at sign-up and are not refundable unless the law says so.",
       ],
     },
     {
-      title: "Help and support",
+      nav: "Support",
+      title: "We, not Apple, provide support",
       body: [
-        "We alone are responsible for maintenance and support of the service, as described here or as the law requires. Apple has no duty to provide support for the app.",
+        "We alone maintain and support the service, as described here or as the law requires.",
       ],
     },
     {
-      title: "Warranty",
+      nav: "Warranty",
+      title: "The service is provided “as is”",
       body: [
-        "To the fullest extent the law allows, the service is provided “as is” and “as available”. We alone are responsible for any product warranties that aren’t legally disclaimed.",
-        "If the app doesn’t meet a warranty that applies, you can tell Apple and Apple will refund the purchase price, if any. Beyond that, Apple has no warranty duty for the app, and any other claims or losses from a failed warranty are our responsibility.",
+        "To the fullest extent the law allows, the service is “as is” and “as available”. We alone are responsible for any product warranty we have not legally disclaimed.",
+        "If the app fails a warranty that applies, you can tell Apple, and Apple will refund the purchase price, if any. Beyond that, Apple has no warranty duty for the app. Any other claim or loss from a failed warranty is our responsibility.",
       ],
     },
     {
-      title: "Claims",
+      nav: "Claims",
+      title: "We handle claims about the app, not Apple",
       body: [
-        "We, not Apple, handle any claims from you or anyone else about the app or your use of it. That includes claims about product safety, claims that the app breaks a legal or regulatory rule, and claims under consumer-protection or privacy laws.",
+        "That includes claims about product safety, claims that the app breaks a legal or regulatory rule, and claims under consumer-protection or privacy law.",
       ],
     },
     {
-      title: "Who owns what",
+      nav: "Ownership",
+      title: "The service belongs to Produce AI",
       body: [
-        "The service, including its software, design, logos and content, belongs to Produce AI and is protected by law. If someone claims the app infringes their intellectual property, we, not Apple, will investigate, defend and settle that claim.",
+        "That includes the software, design, logos and content. If someone claims the app infringes their intellectual property, we, not Apple, investigate, defend and settle it.",
       ],
     },
     {
-      title: "Legal rules",
+      nav: "Legal rules",
+      title: "You confirm you’re not barred from using U.S. services",
       body: [
-        "You confirm that you’re not in a country under a U.S. Government embargo or listed as a “terrorist supporting” country, and that you’re not on any U.S. Government list of prohibited or restricted parties.",
+        "You are not in a country under a U.S. Government embargo or listed as a “terrorist supporting” country, and you are not on any U.S. Government list of prohibited or restricted parties.",
       ],
     },
     {
-      title: "Other companies’ terms",
+      nav: "Other terms",
+      title: "You also follow the terms of the services you connect",
       body: [
-        "You must also follow the terms of other services you use with ours, such as your mobile data plan and your payment processor’s merchant agreement.",
+        "For example, your mobile data plan and your payment processor’s merchant agreement.",
       ],
     },
     {
-      title: "Limits on our responsibility",
+      nav: "Our liability",
+      title: "Our liability is capped at what you paid in the last 12 months",
       body: [
-        "As far as the law allows, we aren’t responsible for indirect or knock-on losses, such as lost profits, spoiled stock or time your business is interrupted. For any claim, the most we owe is what you paid us in the 12 months before it.",
+        "As far as the law allows, we aren’t responsible for indirect losses such as lost profits, spoiled stock or time your business is interrupted.",
       ],
     },
     {
-      title: "Ending this agreement",
+      nav: "Ending this",
+      title: "You can leave any time. We can suspend you if you break these terms",
       body: [
-        "You can stop using the service and delete your account any time. We can suspend or end your access if you break these terms. Parts of these terms that are meant to keep applying afterward will.",
+        "Parts of these terms that are meant to keep applying afterward will.",
       ],
     },
     {
-      title: "Which law applies",
+      nav: "Governing law",
+      title: "New York law applies",
       body: ["These terms are governed by the laws of the State of New York, USA."],
     },
     {
-      title: "Apple’s rights",
+      nav: "Apple’s rights",
+      title: "Apple can enforce these terms against you",
       body: [
-        "You and we agree that Apple and its subsidiaries are third-party beneficiaries of these terms. Once you accept them, Apple can enforce them against you.",
+        "You and we agree that Apple and its subsidiaries are third-party beneficiaries. Once you accept the terms, Apple can enforce them.",
       ],
     },
     {
-      title: "Changes to these terms",
-      body: [
-        "If we update these terms, we’ll post the new version here with a new date. If you keep using the service after that, you accept the update.",
-      ],
+      nav: "Changes",
+      title: "We post changes here, with a new date",
+      body: ["If you keep using the service after that, you accept the update."],
     },
   ],
 };

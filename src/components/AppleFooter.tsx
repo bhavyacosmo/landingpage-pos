@@ -56,7 +56,7 @@ export const AppleFooter: React.FC = () => {
             </div>
             <ul className="space-y-2 font-mono-telemetry text-[11px]">
               <li className="text-black dark:text-white font-bold text-sm">(347) 213-0687</li>
-              <li>support@produceai.co</li>
+              <li>support@producepos.app</li>
               <li>3508 White Plains Rd, Bronx, NY</li>
               <li className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">24/7 Produce Support Line</li>
             </ul>

@@ -1,0 +1,32 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "rethink sans",
+        "createdAt": "2026-11-16T18:04:17.988Z",
+        "reason": "DESIGN.md is a stale Stitch export; the live site's type stack is Rethink Sans + Instrument Serif accent + Fragment Mono, chosen in this redesign (assistant decision, not user-confirmed)"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "instrument serif",
+        "createdAt": "2026-11-16T18:04:18.015Z",
+        "reason": "DESIGN.md is a stale Stitch export; the live site's type stack is Rethink Sans + Instrument Serif accent + Fragment Mono, chosen in this redesign (assistant decision, not user-confirmed)"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "fragment mono",
+        "createdAt": "2026-11-16T18:04:18.032Z",
+        "reason": "DESIGN.md is a stale Stitch export; the live site's type stack is Rethink Sans + Instrument Serif accent + Fragment Mono, chosen in this redesign (assistant decision, not user-confirmed)"
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "createdAt": "2026-11-16T18:12:29.556Z",
+        "reason": "Deliberate italic accent on a few headline words only, paired with heavy Rethink Sans; assistant decision, not user-confirmed"
+      }
+    ]
+  }
+}

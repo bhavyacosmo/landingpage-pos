@@ -41,10 +41,10 @@ export const VoriFooter: React.FC<VoriFooterProps> = ({ onBookDemo }) => (
         </div>
         <div className="md:col-span-5 space-y-1.5 leading-[1.6]">
           <a
-            href="mailto:support@produceai.co"
+            href="mailto:support@producepos.app"
             className="link-draw hover:text-white transition-colors"
           >
-            support@produceai.co
+            support@producepos.app
           </a>
           <p>3508 White Plains Rd, Bronx, NY</p>
         </div>

@@ -7,6 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
+        ink: "#07080a",
+        panel: "#0e100e",
+        neon: "#31e327",
+        "neon-deep": "#1fb818",
+        paper: "#f1f0ea",
         // Produce POS Fresh Green Brand Palette
         "produce-green": "#10b981",
         "produce-green-dark": "#059669",
@@ -38,9 +43,9 @@ export default {
       },
       fontFamily: {
         sans: ['"Rethink Sans"', "Arial", "system-ui", "-apple-system", "sans-serif"],
-        serif: ['"STIX Two Text"', "Georgia", "serif"],
+        serif: ['"Instrument Serif"', "Georgia", "serif"],
         mono: ['"Fragment Mono"', "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
-        editorial: ['"STIX Two Text"', "Georgia", "serif"],
+        editorial: ['"Instrument Serif"', "Georgia", "serif"],
         "mono-telemetry": ['"Fragment Mono"', "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       maxWidth: {
