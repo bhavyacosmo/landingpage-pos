@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
+import { useFormspark } from "@formspark/use-formspark";
 import { PageTabs } from "./LegalPage";
+
+const FORMSPARK_FORM_ID = "kJSJ7GLAX";
 
 const FIELD =
   "w-full px-4 py-3 rounded-xl bg-white border border-[#07080a]/20 focus:border-[#07080a] focus:outline-none text-[15px] placeholder:text-[#07080a]/35";
@@ -17,6 +20,19 @@ export const PartnershipsPage: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [sendError, setSendError] = useState(false);
+  const [submit, submitting] = useFormspark({ formId: FORMSPARK_FORM_ID });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSendError(false);
+    try {
+      await submit({ name, phone, email, source: "Partnerships page" });
+      setSent(true);
+    } catch {
+      setSendError(true);
+    }
+  };
 
   return (
     <section className="bg-paper text-ink pt-28 sm:pt-36 pb-24 sm:pb-36">
@@ -59,13 +75,7 @@ export const PartnershipsPage: React.FC = () => {
             ) : (
               <>
                 <h3 className="font-extrabold text-[28px] sm:text-[32px] leading-[1.1] tracking-[-0.025em]">Apply to partner</h3>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setSent(true);
-                  }}
-                  className="mt-8 space-y-5"
-                >
+                <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                   <p className="text-[13px] text-[#07080a]/55">
                     <span className="text-[#d92d20]">*</span> Required
                   </p>
@@ -81,8 +91,17 @@ export const PartnershipsPage: React.FC = () => {
                     <label className={LABEL} htmlFor="pn-email">Email<span className="text-[#d92d20] ml-0.5" aria-hidden="true">*</span></label>
                     <input id="pn-email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" placeholder="e.g. maria@example.com" className={FIELD} />
                   </div>
-                  <button type="submit" className="btn btn-neon h-14 px-8 text-[16px] w-full">
-                    Send
+                  {sendError && (
+                    <div className="px-4 py-3 rounded-xl bg-[#fef3f2] border border-[#d92d20]/30 text-[14px] text-[#b42318]">
+                      Something went wrong sending your request. Please try again, or call +1 (347) 213-0687.
+                    </div>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="btn btn-neon h-14 px-8 text-[16px] w-full disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {submitting ? "Sending…" : "Send"}
                   </button>
                 </form>
               </>
