@@ -28,7 +28,7 @@ export const PRIVACY: LegalDoc = {
     "Delete your account in the app, any time.",
   ],
   intro:
-    "This covers what Produce AI POS Inc. collects when you use our register software, apps, web back office and this website.",
+    "This covers what Produce AI POS LLC collects when you use our register software, apps, web back office and this website.",
   sections: [
     {
       nav: "What we collect",
@@ -214,7 +214,7 @@ export const TERMS: LegalDoc = {
     "Stop using it and delete your account any time.",
   ],
   intro:
-    "These terms are an agreement between you and Produce AI POS Inc. They cover our register software, apps, web back office, hardware program and this website. By downloading, installing or using any of it, you agree.",
+    "These terms are an agreement between you and Produce AI POS LLC. They cover our register software, apps, web back office, hardware program and this website. By downloading, installing or using any of it, you agree.",
   sections: [
     {
       nav: "Who this is with",

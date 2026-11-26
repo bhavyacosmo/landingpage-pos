@@ -155,7 +155,7 @@ export const LegalPage: React.FC<{ doc: LegalDoc }> = ({ doc }) => {
             <div className="mt-6 pt-10 border-t-2 border-ink">
               <h2 className="text-[24px] sm:text-[28px] font-bold tracking-[-0.02em]">{doc.contactHeading}</h2>
               <p className="mt-4 text-[17px] leading-[1.7] text-ink/70">
-                Produce AI POS Inc.
+                Produce AI POS LLC
                 <br />
                 3508 White Plains Rd, Bronx, NY
               </p>

@@ -69,7 +69,7 @@ export const AppleFooter: React.FC = () => {
             <div className="h-7 px-2 py-0.5 rounded-lg bg-black border border-white/10 flex items-center justify-center">
               <img src="/images/produce_ai_logo.png" alt="Produce Ai" className="h-full w-auto object-contain" />
             </div>
-            <span>Copyright &copy; 2026 Produce AI POS Inc. All rights reserved.</span>
+            <span>Copyright &copy; 2026 Produce AI POS LLC. All rights reserved.</span>
           </div>
           <div className="flex gap-4 sm:gap-6 font-mono-telemetry">
             <a href="#" className="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>

@@ -86,7 +86,7 @@ export const Footer: React.FC<{ onBookDemo: (c?: string) => void; compact?: bool
 
       <div className="mt-16 pt-8 border-t border-white/12 flex flex-col md:flex-row md:items-start justify-between gap-6 text-[13px] leading-relaxed text-white/45">
         <div className="space-y-1.5 max-w-2xl">
-          <p>© 2026 Produce AI POS Inc. All rights reserved.</p>
+          <p>© 2026 Produce AI POS LLC. All rights reserved.</p>
           <p>Free hardware is for qualified grocery and produce store owners. Extras are sold separately. Apple, Google Play and Windows are trademarks of their owners.</p>
         </div>
         <div className="flex flex-wrap gap-x-6 gap-y-2 shrink-0">

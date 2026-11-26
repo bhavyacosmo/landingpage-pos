@@ -61,7 +61,7 @@ export const VoriFooter: React.FC<VoriFooterProps> = ({ onBookDemo }) => (
       </p>
 
       <div className="mt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-[13px] text-white/45">
-        <span>© 2026 Produce AI POS Inc. All rights reserved.</span>
+        <span>© 2026 Produce AI POS LLC. All rights reserved.</span>
         <div className="flex gap-6">
           <a href="/privacy-policy" className="link-draw hover:text-white transition-colors">
             Privacy Policy

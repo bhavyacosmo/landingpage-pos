@@ -89,7 +89,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Legal Row */}
         <div className="pt-8 border-t border-border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-subtle">
-          <p>&copy; 2026 Stitch Produce OS Systems Inc. Built for Independent Grocers.</p>
+          <p>&copy; 2026 Produce AI POS LLC. Built for Independent Grocers.</p>
           <div className="flex items-center gap-5">
             <a href="#" className="hover:text-slate-900 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-slate-900 transition-colors">Terms of Service</a>
